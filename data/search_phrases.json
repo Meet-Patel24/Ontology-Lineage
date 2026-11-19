@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Lineage of $column",
+    "description": "Upstream and downstream FLOWS_TO paths for a column.",
+    "cypher": "MATCH (c:Column)\nWHERE toLower(c.name) = toLower($column) OR toLower(c.table + '.' + c.name) = toLower($column) OR c.id = $column\nRETURN c,\n  [p = (:Column)-[:FLOWS_TO*1..6]->(c) | p] AS upstream,\n  [p = (c)-[:FLOWS_TO*1..6]->(:Column) | p] AS downstream",
+    "params": [
+      {
+        "name": "column",
+        "source": "Column.name"
+      }
+    ],
+    "id": "lineage-of-column",
+    "builtin": true
+  },
+  {
+    "name": "Impact of changing $table",
+    "description": "Every column and table downstream of a table or view.",
+    "cypher": "MATCH (t)\nWHERE (t:Table OR t:View) AND (toLower(t.full_name) = toLower($table) OR toLower(t.name) = toLower($table) OR t.id = $table)\nRETURN t,\n  [p = (t)-[:HAS_COLUMN]->(:Column)-[:FLOWS_TO*1..6]->(:Column)<-[:HAS_COLUMN]-() | p] AS impact,\n  [p = (t)-[:FEEDS]->() | p] AS feeds",
+    "params": [
+      {
+        "name": "table",
+        "source": "Table.full_name"
+      }
+    ],
+    "id": "impact-of-table",
+    "builtin": true
+  },
+  {
+    "name": "Where does PII flow",
+    "description": "PII columns, their classification and every downstream flow.",
+    "cypher": "MATCH (c:Column) WHERE c.is_pii = true\nRETURN c,\n  [p = (c)-[:FLOWS_TO*1..4]->(:Column) | p] AS flows,\n  [p = (c)-[:CLASSIFIED_AS]->() | p] AS classification",
+    "params": [],
+    "id": "where-does-pii-flow",
+    "builtin": true
+  },
+  {
+    "name": "Policy clauses for $column",
+    "description": "PolicyChunk / PolicyDocument nodes linked to a column within 1-2 hops.",
+    "cypher": "MATCH (c:Column)\nWHERE toLower(c.name) = toLower($column) OR toLower(c.table + '.' + c.name) = toLower($column) OR c.id = $column\nRETURN c,\n  [p = (c)-[*1..2]-(x) WHERE x:PolicyChunk OR x:PolicyDocument | p] AS policy",
+    "params": [
+      {
+        "name": "column",
+        "source": "Column.name"
+      }
+    ],
+    "id": "policy-clauses-for-column",
+    "builtin": true
+  },
+  {
+    "name": "Pipeline $pipeline",
+    "description": "A pipeline with its activities, notebooks and the tables they read / write.",
+    "cypher": "MATCH (pl:Pipeline)\nWHERE toLower(pl.name) = toLower($pipeline) OR pl.id = $pipeline\nRETURN pl,\n  [p = (pl)-[:CONTAINS]->(:Activity) | p] AS activities,\n  [p = (pl)-[:CONTAINS]->(:Activity)-[]->() | p] AS io",
+    "params": [
+      {
+        "name": "pipeline",
+        "source": "Pipeline.name"
+      }
+    ],
+    "id": "pipeline",
+    "builtin": true
+  }
+]

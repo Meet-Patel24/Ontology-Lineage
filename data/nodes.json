@@ -1,0 +1,1299 @@
+[
+ {
+  "id": "pg:bankdb",
+  "label": "Database",
+  "name": "bankdb",
+  "platform": "PostgreSQL",
+  "host": "pg-bank.postgres.database.azure.com"
+ },
+ {
+  "id": "pg:bankdb.banking",
+  "label": "Schema",
+  "name": "banking",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers",
+  "label": "Table",
+  "name": "customers",
+  "full_name": "banking.customers",
+  "platform": "PostgreSQL",
+  "comment": "Retail and corporate customers"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "banking.customers",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": "Surrogate key",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.first_name",
+  "label": "Column",
+  "name": "first_name",
+  "table": "banking.customers",
+  "data_type": "varchar(80)",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: given name",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.last_name",
+  "label": "Column",
+  "name": "last_name",
+  "table": "banking.customers",
+  "data_type": "varchar(80)",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: family name",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.email",
+  "label": "Column",
+  "name": "email",
+  "table": "banking.customers",
+  "data_type": "varchar(200)",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: contact e-mail",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.phone",
+  "label": "Column",
+  "name": "phone",
+  "table": "banking.customers",
+  "data_type": "varchar(30)",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: contact phone number",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.national_id",
+  "label": "Column",
+  "name": "national_id",
+  "table": "banking.customers",
+  "data_type": "varchar(20)",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: government identifier",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.date_of_birth",
+  "label": "Column",
+  "name": "date_of_birth",
+  "table": "banking.customers",
+  "data_type": "date",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: date of birth",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.address_line",
+  "label": "Column",
+  "name": "address_line",
+  "table": "banking.customers",
+  "data_type": "varchar(200)",
+  "is_pii": true,
+  "is_pk": false,
+  "comment": "PII: street address",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.city",
+  "label": "Column",
+  "name": "city",
+  "table": "banking.customers",
+  "data_type": "varchar(80)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.country",
+  "label": "Column",
+  "name": "country",
+  "table": "banking.customers",
+  "data_type": "char(2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "ISO country code",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.segment",
+  "label": "Column",
+  "name": "segment",
+  "table": "banking.customers",
+  "data_type": "varchar(20)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "RETAIL / SME / CORPORATE",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.customers.created_at",
+  "label": "Column",
+  "name": "created_at",
+  "table": "banking.customers",
+  "data_type": "timestamp",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts",
+  "label": "Table",
+  "name": "accounts",
+  "full_name": "banking.accounts",
+  "platform": "PostgreSQL",
+  "comment": "Deposit and current accounts"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "banking.accounts",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "banking.accounts",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "FK to customers",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.branch_id",
+  "label": "Column",
+  "name": "branch_id",
+  "table": "banking.accounts",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "FK to branches",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.account_type",
+  "label": "Column",
+  "name": "account_type",
+  "table": "banking.accounts",
+  "data_type": "varchar(20)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "CURRENT / SAVINGS",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.currency",
+  "label": "Column",
+  "name": "currency",
+  "table": "banking.accounts",
+  "data_type": "char(3)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.balance",
+  "label": "Column",
+  "name": "balance",
+  "table": "banking.accounts",
+  "data_type": "numeric(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "Ledger balance",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.status",
+  "label": "Column",
+  "name": "status",
+  "table": "banking.accounts",
+  "data_type": "varchar(12)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.accounts.opened_at",
+  "label": "Column",
+  "name": "opened_at",
+  "table": "banking.accounts",
+  "data_type": "timestamp",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans",
+  "label": "Table",
+  "name": "loans",
+  "full_name": "banking.loans",
+  "platform": "PostgreSQL",
+  "comment": "Loan contracts"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.loan_id",
+  "label": "Column",
+  "name": "loan_id",
+  "table": "banking.loans",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "banking.loans",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "FK to customers",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "banking.loans",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "FK to accounts",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.loan_type",
+  "label": "Column",
+  "name": "loan_type",
+  "table": "banking.loans",
+  "data_type": "varchar(20)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "MORTGAGE / PERSONAL / AUTO",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.principal_amount",
+  "label": "Column",
+  "name": "principal_amount",
+  "table": "banking.loans",
+  "data_type": "numeric(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "Original principal",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.outstanding_amount",
+  "label": "Column",
+  "name": "outstanding_amount",
+  "table": "banking.loans",
+  "data_type": "numeric(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "Remaining balance",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.interest_rate",
+  "label": "Column",
+  "name": "interest_rate",
+  "table": "banking.loans",
+  "data_type": "numeric(6,3)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.loan_status",
+  "label": "Column",
+  "name": "loan_status",
+  "table": "banking.loans",
+  "data_type": "varchar(12)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "ACTIVE / ARREARS / DEFAULTED / CLOSED",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.start_date",
+  "label": "Column",
+  "name": "start_date",
+  "table": "banking.loans",
+  "data_type": "date",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.loans.maturity_date",
+  "label": "Column",
+  "name": "maturity_date",
+  "table": "banking.loans",
+  "data_type": "date",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions",
+  "label": "Table",
+  "name": "transactions",
+  "full_name": "banking.transactions",
+  "platform": "PostgreSQL",
+  "comment": "Account transactions"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.txn_id",
+  "label": "Column",
+  "name": "txn_id",
+  "table": "banking.transactions",
+  "data_type": "bigint",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "banking.transactions",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "FK to accounts",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.txn_type",
+  "label": "Column",
+  "name": "txn_type",
+  "table": "banking.transactions",
+  "data_type": "varchar(12)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "DEBIT / CREDIT",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.amount",
+  "label": "Column",
+  "name": "amount",
+  "table": "banking.transactions",
+  "data_type": "numeric(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.currency",
+  "label": "Column",
+  "name": "currency",
+  "table": "banking.transactions",
+  "data_type": "char(3)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.txn_ts",
+  "label": "Column",
+  "name": "txn_ts",
+  "table": "banking.transactions",
+  "data_type": "timestamp",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.transactions.channel",
+  "label": "Column",
+  "name": "channel",
+  "table": "banking.transactions",
+  "data_type": "varchar(12)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": "BRANCH / ONLINE / ATM",
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.branches",
+  "label": "Table",
+  "name": "branches",
+  "full_name": "banking.branches",
+  "platform": "PostgreSQL",
+  "comment": "Bank branches"
+ },
+ {
+  "id": "pg:bankdb.banking.branches.branch_id",
+  "label": "Column",
+  "name": "branch_id",
+  "table": "banking.branches",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.branches.branch_name",
+  "label": "Column",
+  "name": "branch_name",
+  "table": "banking.branches",
+  "data_type": "varchar(80)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.branches.city",
+  "label": "Column",
+  "name": "city",
+  "table": "banking.branches",
+  "data_type": "varchar(80)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.branches.region",
+  "label": "Column",
+  "name": "region",
+  "table": "banking.branches",
+  "data_type": "varchar(40)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_customer_accounts",
+  "label": "View",
+  "name": "vw_customer_accounts",
+  "full_name": "banking.vw_customer_accounts",
+  "platform": "PostgreSQL",
+  "comment": "Customers with their accounts"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_customer_accounts.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "banking.vw_customer_accounts",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_customer_accounts.segment",
+  "label": "Column",
+  "name": "segment",
+  "table": "banking.vw_customer_accounts",
+  "data_type": "varchar(20)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_customer_accounts.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "banking.vw_customer_accounts",
+  "data_type": "integer",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_customer_accounts.account_type",
+  "label": "Column",
+  "name": "account_type",
+  "table": "banking.vw_customer_accounts",
+  "data_type": "varchar(20)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_customer_accounts.balance",
+  "label": "Column",
+  "name": "balance",
+  "table": "banking.vw_customer_accounts",
+  "data_type": "numeric(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_loan_summary",
+  "label": "View",
+  "name": "vw_loan_summary",
+  "full_name": "banking.vw_loan_summary",
+  "platform": "PostgreSQL",
+  "comment": "Outstanding loans by type"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_loan_summary.loan_type",
+  "label": "Column",
+  "name": "loan_type",
+  "table": "banking.vw_loan_summary",
+  "data_type": "varchar(20)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_loan_summary.total_outstanding",
+  "label": "Column",
+  "name": "total_outstanding",
+  "table": "banking.vw_loan_summary",
+  "data_type": "numeric",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "pg:bankdb.banking.vw_loan_summary.loan_count",
+  "label": "Column",
+  "name": "loan_count",
+  "table": "banking.vw_loan_summary",
+  "data_type": "bigint",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "PostgreSQL"
+ },
+ {
+  "id": "fabric:Ontology_Lineage",
+  "label": "Lakehouse",
+  "name": "Ontology_Lineage",
+  "platform": "Fabric",
+  "item_id": "7d1c2f0e-4b8a-4c51-9f3e-2a6b5d8c1e90"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim",
+  "label": "Schema",
+  "name": "dim",
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact",
+  "label": "Schema",
+  "name": "fact",
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer",
+  "label": "Table",
+  "name": "customer",
+  "full_name": "dim.customer",
+  "platform": "Fabric Lakehouse",
+  "comment": "Customer dimension (PII masked)"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "dim.customer",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.last_name_masked",
+  "label": "Column",
+  "name": "last_name_masked",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.email_masked",
+  "label": "Column",
+  "name": "email_masked",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.phone_masked",
+  "label": "Column",
+  "name": "phone_masked",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.national_id_masked",
+  "label": "Column",
+  "name": "national_id_masked",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.birth_year",
+  "label": "Column",
+  "name": "birth_year",
+  "table": "dim.customer",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.city",
+  "label": "Column",
+  "name": "city",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.country",
+  "label": "Column",
+  "name": "country",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.segment",
+  "label": "Column",
+  "name": "segment",
+  "table": "dim.customer",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.customer.customer_since",
+  "label": "Column",
+  "name": "customer_since",
+  "table": "dim.customer",
+  "data_type": "date",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account",
+  "label": "Table",
+  "name": "account",
+  "full_name": "dim.account",
+  "platform": "Fabric Lakehouse",
+  "comment": "Account dimension"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "dim.account",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "dim.account",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.account_type",
+  "label": "Column",
+  "name": "account_type",
+  "table": "dim.account",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.currency",
+  "label": "Column",
+  "name": "currency",
+  "table": "dim.account",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.balance",
+  "label": "Column",
+  "name": "balance",
+  "table": "dim.account",
+  "data_type": "decimal(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.status",
+  "label": "Column",
+  "name": "status",
+  "table": "dim.account",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.opened_date",
+  "label": "Column",
+  "name": "opened_date",
+  "table": "dim.account",
+  "data_type": "date",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.branch_name",
+  "label": "Column",
+  "name": "branch_name",
+  "table": "dim.account",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.dim.account.branch_region",
+  "label": "Column",
+  "name": "branch_region",
+  "table": "dim.account",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "label": "Table",
+  "name": "loan_portfolio",
+  "full_name": "fact.loan_portfolio",
+  "platform": "Fabric Lakehouse",
+  "comment": "Loan portfolio with risk classification"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_id",
+  "label": "Column",
+  "name": "loan_id",
+  "table": "fact.loan_portfolio",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "fact.loan_portfolio",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "fact.loan_portfolio",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_type",
+  "label": "Column",
+  "name": "loan_type",
+  "table": "fact.loan_portfolio",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.principal_amount",
+  "label": "Column",
+  "name": "principal_amount",
+  "table": "fact.loan_portfolio",
+  "data_type": "decimal(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.outstanding_amount",
+  "label": "Column",
+  "name": "outstanding_amount",
+  "table": "fact.loan_portfolio",
+  "data_type": "decimal(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.interest_rate",
+  "label": "Column",
+  "name": "interest_rate",
+  "table": "fact.loan_portfolio",
+  "data_type": "decimal(6,3)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_status",
+  "label": "Column",
+  "name": "loan_status",
+  "table": "fact.loan_portfolio",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.risk_bucket",
+  "label": "Column",
+  "name": "risk_bucket",
+  "table": "fact.loan_portfolio",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.repayment_ratio",
+  "label": "Column",
+  "name": "repayment_ratio",
+  "table": "fact.loan_portfolio",
+  "data_type": "decimal(9,4)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.loan_portfolio.term_months",
+  "label": "Column",
+  "name": "term_months",
+  "table": "fact.loan_portfolio",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "label": "Table",
+  "name": "transactions_daily",
+  "full_name": "fact.transactions_daily",
+  "platform": "Fabric Lakehouse",
+  "comment": "Daily transaction totals per account"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily.account_id",
+  "label": "Column",
+  "name": "account_id",
+  "table": "fact.transactions_daily",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily.txn_date",
+  "label": "Column",
+  "name": "txn_date",
+  "table": "fact.transactions_daily",
+  "data_type": "date",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily.txn_type",
+  "label": "Column",
+  "name": "txn_type",
+  "table": "fact.transactions_daily",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily.channel",
+  "label": "Column",
+  "name": "channel",
+  "table": "fact.transactions_daily",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily.total_amount",
+  "label": "Column",
+  "name": "total_amount",
+  "table": "fact.transactions_daily",
+  "data_type": "decimal(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.transactions_daily.txn_count",
+  "label": "Column",
+  "name": "txn_count",
+  "table": "fact.transactions_daily",
+  "data_type": "bigint",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360",
+  "label": "Table",
+  "name": "customer_360",
+  "full_name": "fact.customer_360",
+  "platform": "Fabric Lakehouse",
+  "comment": "One row per customer with balances and loan exposure"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.customer_id",
+  "label": "Column",
+  "name": "customer_id",
+  "table": "fact.customer_360",
+  "data_type": "int",
+  "is_pii": false,
+  "is_pk": true,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.segment",
+  "label": "Column",
+  "name": "segment",
+  "table": "fact.customer_360",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.email_masked",
+  "label": "Column",
+  "name": "email_masked",
+  "table": "fact.customer_360",
+  "data_type": "string",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.account_count",
+  "label": "Column",
+  "name": "account_count",
+  "table": "fact.customer_360",
+  "data_type": "bigint",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.total_balance",
+  "label": "Column",
+  "name": "total_balance",
+  "table": "fact.customer_360",
+  "data_type": "decimal(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.active_loans",
+  "label": "Column",
+  "name": "active_loans",
+  "table": "fact.customer_360",
+  "data_type": "bigint",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.total_outstanding",
+  "label": "Column",
+  "name": "total_outstanding",
+  "table": "fact.customer_360",
+  "data_type": "decimal(18,2)",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:Ontology_Lineage.fact.customer_360.high_risk_loans",
+  "label": "Column",
+  "name": "high_risk_loans",
+  "table": "fact.customer_360",
+  "data_type": "bigint",
+  "is_pii": false,
+  "is_pk": false,
+  "comment": null,
+  "platform": "Fabric Lakehouse"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Customer_Dim",
+  "label": "Pipeline",
+  "name": "PL_CP_Customer_Dim",
+  "platform": "Fabric Data Factory",
+  "item_id": "pl-8c560b77"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Customer_Dim.Copy data1",
+  "label": "Activity",
+  "name": "Copy data1",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity_type": "Copy",
+  "query": "SELECT * FROM banking.customers",
+  "pre_copy_script": "DELETE FROM dim.customer"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Account_Dim",
+  "label": "Pipeline",
+  "name": "PL_CP_Account_Dim",
+  "platform": "Fabric Data Factory",
+  "item_id": "pl-080679ef"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Account_Dim.Copy data1",
+  "label": "Activity",
+  "name": "Copy data1",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity_type": "Copy",
+  "query": "SELECT * FROM banking.accounts",
+  "pre_copy_script": "DELETE FROM dim.account"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Loan_Portfolio",
+  "label": "Pipeline",
+  "name": "PL_CP_Loan_Portfolio",
+  "platform": "Fabric Data Factory",
+  "item_id": "pl-7f7f9a1e"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Loan_Portfolio.Copy data1",
+  "label": "Activity",
+  "name": "Copy data1",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity_type": "Copy",
+  "query": "SELECT * FROM banking.loans",
+  "pre_copy_script": "DELETE FROM fact.loan_portfolio"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Transactions_Daily",
+  "label": "Pipeline",
+  "name": "PL_CP_Transactions_Daily",
+  "platform": "Fabric Data Factory",
+  "item_id": "pl-86377e01"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Transactions_Daily.Copy data1",
+  "label": "Activity",
+  "name": "Copy data1",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity_type": "Copy",
+  "query": "SELECT * FROM banking.transactions",
+  "pre_copy_script": "DELETE FROM fact.transactions_daily"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Customer_360",
+  "label": "Pipeline",
+  "name": "PL_CP_Customer_360",
+  "platform": "Fabric Data Factory",
+  "item_id": "pl-f5111970"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Customer_360.Copy data1",
+  "label": "Activity",
+  "name": "Copy data1",
+  "pipeline": "PL_CP_Customer_360",
+  "activity_type": "Copy",
+  "query": null,
+  "pre_copy_script": "DELETE FROM fact.customer_360"
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Loan_Portfolio.Lookup watermark",
+  "label": "Activity",
+  "name": "Lookup watermark",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity_type": "Lookup",
+  "query": "SELECT MAX(start_date) AS watermark FROM banking.loans",
+  "pre_copy_script": null
+ },
+ {
+  "id": "fabric:pipeline:PL_CP_Customer_360.Invoke dimensions",
+  "label": "Activity",
+  "name": "Invoke dimensions",
+  "pipeline": "PL_CP_Customer_360",
+  "activity_type": "ExecutePipeline",
+  "query": null,
+  "pre_copy_script": null
+ },
+ {
+  "id": "classification:PII",
+  "label": "Classification",
+  "name": "PII",
+  "description": "Personally identifiable information"
+ },
+ {
+  "id": "classification:PII_MASKED",
+  "label": "Classification",
+  "name": "PII_MASKED",
+  "description": "Derived from PII through masking, hashing or generalisation"
+ },
+ {
+  "id": "concept:Customer",
+  "label": "BusinessConcept",
+  "name": "Customer",
+  "description": "A person or organisation that holds products with the bank"
+ },
+ {
+  "id": "concept:Account",
+  "label": "BusinessConcept",
+  "name": "Account",
+  "description": "A deposit or current account held by a customer"
+ },
+ {
+  "id": "concept:Loan",
+  "label": "BusinessConcept",
+  "name": "Loan",
+  "description": "A credit facility granted to a customer"
+ },
+ {
+  "id": "concept:Transaction",
+  "label": "BusinessConcept",
+  "name": "Transaction",
+  "description": "A debit or credit movement on an account"
+ },
+ {
+  "id": "concept:Branch",
+  "label": "BusinessConcept",
+  "name": "Branch",
+  "description": "A physical branch that services accounts"
+ },
+ {
+  "id": "concept:CreditRisk",
+  "label": "BusinessConcept",
+  "name": "CreditRisk",
+  "description": "Risk classification of the loan book"
+ }
+]

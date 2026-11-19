@@ -1,0 +1,102 @@
+import type {
+  Direction,
+  GraphData,
+  Health,
+  ImpactRow,
+  ImpactSummary,
+  Level,
+  NeoGraph,
+  PageResponse,
+  PiiRow,
+  PiiSummary,
+  PipelineRow,
+  PipelineSummary,
+  QueryResponse,
+  SchemaInfo,
+  SearchRow,
+} from "./types";
+
+/** Error carrying the Neo4j / API error code. */
+export class ApiError extends Error {
+  constructor(
+    public status: number,
+    public code: string,
+    message: string,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+const BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? "";
+
+type QueryValue = string | number | boolean | undefined | null;
+
+export async function request<T>(
+  path: string,
+  init: RequestInit & { query?: Record<string, QueryValue> } = {},
+): Promise<T> {
+  const { query, ...rest } = init;
+  let url = `${BASE}${path}`;
+  if (query) {
+    const qs = new URLSearchParams();
+    for (const [k, v] of Object.entries(query)) if (v !== undefined && v !== null) qs.set(k, String(v));
+    const s = qs.toString();
+    if (s) url += `?${s}`;
+  }
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      ...rest,
+      headers: { "Content-Type": "application/json", ...(rest.headers ?? {}) },
+    });
+  } catch (e) {
+    if ((e as Error)?.name === "AbortError") throw e; // cancelled on purpose
+    throw new ApiError(0, "Network", "Cannot reach the Lineage Studio API. Is the backend running?");
+  }
+  const text = await res.text();
+  let body: unknown = undefined;
+  try {
+    body = text ? JSON.parse(text) : undefined;
+  } catch {
+    /* non-JSON body */
+  }
+  if (!res.ok) {
+    const err = (body as { error?: { code?: string; message?: string } } | undefined)?.error;
+    throw new ApiError(res.status, err?.code ?? `HTTP ${res.status}`, err?.message ?? (text || res.statusText));
+  }
+  return body as T;
+}
+
+export const api = {
+  health: () => request<Health>("/api/health"),
+  reconnect: () => request<Health>("/api/reconnect", { method: "POST" }),
+  schema: () => request<SchemaInfo>("/api/schema"),
+  schemaGraph: () => request<PageResponse>("/api/schema/graph"),
+
+  query: (query: string, params: Record<string, unknown> = {}, signal?: AbortSignal) =>
+    request<QueryResponse>("/api/query", { method: "POST", body: JSON.stringify({ query, params }), signal }),
+
+  /** 1-hop neighbourhood by Neo4j elementId (Query page). */
+  neighbors: (elementId: string) =>
+    request<NeoGraph>("/api/neighbors", { query: { id: elementId, format: "graph" } }),
+
+  /** 1-hop neighbourhood by asset id (lineage pages). */
+  assetNeighbors: (id: string) =>
+    request<GraphData & { cypher: string }>("/api/neighbors", { query: { id, format: "lineage" } }),
+
+  search: (q: string, limit = 25) => request<{ rows: SearchRow[] }>("/api/search", { query: { q, limit } }),
+
+  lineage: (id: string, direction: Direction, depth: number, level: Level) =>
+    request<PageResponse>("/api/lineage", { query: { id, direction, depth, level } }),
+
+  impact: (id: string, depth: number, level: Level) =>
+    request<PageResponse<ImpactRow, ImpactSummary>>("/api/impact", { query: { id, depth, level } }),
+
+  pii: () => request<PageResponse<PiiRow, PiiSummary>>("/api/pii"),
+
+  pipelines: () => request<PageResponse<PipelineRow, PipelineSummary>>("/api/pipelines"),
+
+  concepts: (includeTables: boolean) =>
+    request<PageResponse>("/api/concepts", { query: { include_tables: includeTables } }),
+};

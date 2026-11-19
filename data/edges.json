@@ -1,0 +1,1433 @@
+[
+ {
+  "from": "pg:bankdb",
+  "rel": "HAS_SCHEMA",
+  "to": "pg:bankdb.banking"
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.customers"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.first_name"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.first_name",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.last_name"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.last_name",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.email"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.email",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.phone"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.phone",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.national_id"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.national_id",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.date_of_birth"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.date_of_birth",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.address_line"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.address_line",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.city"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.country"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.segment"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.customers.created_at"
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.accounts"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.branch_id"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.account_type"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.currency"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.balance"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.status"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.accounts.opened_at"
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.loans"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.loan_id"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.loan_type"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.principal_amount"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.outstanding_amount"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.interest_rate"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.loan_status"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.start_date"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.loans.maturity_date"
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.transactions"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.txn_id"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.txn_type"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.amount"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.currency"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.txn_ts"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.transactions.channel"
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.branches"
+ },
+ {
+  "from": "pg:bankdb.banking.branches",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.branches.branch_id"
+ },
+ {
+  "from": "pg:bankdb.banking.branches",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.branches.branch_name"
+ },
+ {
+  "from": "pg:bankdb.banking.branches",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.branches.city"
+ },
+ {
+  "from": "pg:bankdb.banking.branches",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.branches.region"
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.vw_customer_accounts"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "FEEDS",
+  "to": "pg:bankdb.banking.vw_customer_accounts"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "FEEDS",
+  "to": "pg:bankdb.banking.vw_customer_accounts"
+ },
+ {
+  "from": "pg:bankdb.banking.vw_customer_accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_customer_accounts.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.customer_id",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_customer_accounts.customer_id",
+  "transformation": "DIRECT",
+  "expression": "customer_id",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.vw_customer_accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_customer_accounts.segment"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.segment",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_customer_accounts.segment",
+  "transformation": "DIRECT",
+  "expression": "segment",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.vw_customer_accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_customer_accounts.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.account_id",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_customer_accounts.account_id",
+  "transformation": "DIRECT",
+  "expression": "account_id",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.vw_customer_accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_customer_accounts.account_type"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.account_type",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_customer_accounts.account_type",
+  "transformation": "DIRECT",
+  "expression": "account_type",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.vw_customer_accounts",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_customer_accounts.balance"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.balance",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_customer_accounts.balance",
+  "transformation": "DIRECT",
+  "expression": "balance",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking",
+  "rel": "HAS_TABLE",
+  "to": "pg:bankdb.banking.vw_loan_summary"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "FEEDS",
+  "to": "pg:bankdb.banking.vw_loan_summary"
+ },
+ {
+  "from": "pg:bankdb.banking.vw_loan_summary",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_loan_summary.loan_type"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.loan_type",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_loan_summary.loan_type",
+  "transformation": "DIRECT",
+  "expression": "loan_type",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.vw_loan_summary",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_loan_summary.total_outstanding"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.outstanding_amount",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_loan_summary.total_outstanding",
+  "transformation": "AGGREGATED",
+  "expression": "SUM(outstanding_amount)",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.vw_loan_summary",
+  "rel": "HAS_COLUMN",
+  "to": "pg:bankdb.banking.vw_loan_summary.loan_count"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.loan_id",
+  "rel": "FLOWS_TO",
+  "to": "pg:bankdb.banking.vw_loan_summary.loan_count",
+  "transformation": "AGGREGATED",
+  "expression": "COUNT(loan_id)",
+  "via": "view",
+  "pipeline": null,
+  "activity": null
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.customer_id",
+  "rel": "REFERENCES",
+  "to": "pg:bankdb.banking.customers.customer_id",
+  "fk_name": "fk_accounts_customer"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.branch_id",
+  "rel": "REFERENCES",
+  "to": "pg:bankdb.banking.branches.branch_id",
+  "fk_name": "fk_accounts_branch"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.customer_id",
+  "rel": "REFERENCES",
+  "to": "pg:bankdb.banking.customers.customer_id",
+  "fk_name": "fk_loans_customer"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.account_id",
+  "rel": "REFERENCES",
+  "to": "pg:bankdb.banking.accounts.account_id",
+  "fk_name": "fk_loans_account"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.account_id",
+  "rel": "REFERENCES",
+  "to": "pg:bankdb.banking.accounts.account_id",
+  "fk_name": "fk_transactions_account"
+ },
+ {
+  "from": "fabric:Ontology_Lineage",
+  "rel": "HAS_SCHEMA",
+  "to": "fabric:Ontology_Lineage.dim"
+ },
+ {
+  "from": "fabric:Ontology_Lineage",
+  "rel": "HAS_SCHEMA",
+  "to": "fabric:Ontology_Lineage.fact"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim",
+  "rel": "HAS_TABLE",
+  "to": "fabric:Ontology_Lineage.dim.customer"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.customer_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.customer_id",
+  "transformation": "DIRECT",
+  "expression": "customer_id",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.last_name_masked"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.last_name_masked",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII_MASKED"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.last_name",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.last_name_masked",
+  "transformation": "MASKED",
+  "expression": "LEFT(last_name, 1) || '***'",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.email_masked"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.email_masked",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII_MASKED"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.email",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.email_masked",
+  "transformation": "MASKED",
+  "expression": "REGEXP_REPLACE(email, '(^.).*(@.*$)', '\\1***\\2')",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.phone_masked"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.phone_masked",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII_MASKED"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.phone",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.phone_masked",
+  "transformation": "MASKED",
+  "expression": "'*******' || RIGHT(phone, 3)",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.national_id_masked"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.national_id_masked",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII_MASKED"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.national_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.national_id_masked",
+  "transformation": "MASKED",
+  "expression": "SHA256(national_id)",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.birth_year"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.birth_year",
+  "rel": "CLASSIFIED_AS",
+  "to": "classification:PII_MASKED"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.date_of_birth",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.birth_year",
+  "transformation": "MASKED",
+  "expression": "EXTRACT(YEAR FROM date_of_birth)",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.city"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.city",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.city",
+  "transformation": "DIRECT",
+  "expression": "city",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.country"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.country",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.country",
+  "transformation": "DIRECT",
+  "expression": "country",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.segment"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.segment",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.segment",
+  "transformation": "DIRECT",
+  "expression": "segment",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.customer.customer_since"
+ },
+ {
+  "from": "pg:bankdb.banking.customers.created_at",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer.customer_since",
+  "transformation": "CAST",
+  "expression": "CAST(created_at AS date)",
+  "pipeline": "PL_CP_Customer_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim",
+  "rel": "HAS_TABLE",
+  "to": "fabric:Ontology_Lineage.dim.account"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.account_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.account_id",
+  "transformation": "DIRECT",
+  "expression": "account_id",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.customer_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.customer_id",
+  "transformation": "DIRECT",
+  "expression": "customer_id",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.account_type"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.account_type",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.account_type",
+  "transformation": "DIRECT",
+  "expression": "account_type",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.currency"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.currency",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.currency",
+  "transformation": "DIRECT",
+  "expression": "currency",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.balance"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.balance",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.balance",
+  "transformation": "CAST",
+  "expression": "CAST(balance AS decimal(18,2))",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.status"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.status",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.status",
+  "transformation": "DIRECT",
+  "expression": "status",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.opened_date"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts.opened_at",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.opened_date",
+  "transformation": "CAST",
+  "expression": "CAST(opened_at AS date)",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.branch_name"
+ },
+ {
+  "from": "pg:bankdb.banking.branches.branch_name",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.branch_name",
+  "transformation": "DIRECT",
+  "expression": "b.branch_name",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.dim.account.branch_region"
+ },
+ {
+  "from": "pg:bankdb.banking.branches.region",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.dim.account.branch_region",
+  "transformation": "DIRECT",
+  "expression": "b.region",
+  "pipeline": "PL_CP_Account_Dim",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact",
+  "rel": "HAS_TABLE",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_id"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.loan_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_id",
+  "transformation": "DIRECT",
+  "expression": "loan_id",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.customer_id"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.customer_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.customer_id",
+  "transformation": "DIRECT",
+  "expression": "customer_id",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.account_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.account_id",
+  "transformation": "DIRECT",
+  "expression": "account_id",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_type"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.loan_type",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_type",
+  "transformation": "DIRECT",
+  "expression": "loan_type",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.principal_amount"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.principal_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.principal_amount",
+  "transformation": "CAST",
+  "expression": "CAST(principal_amount AS decimal(18,2))",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.outstanding_amount"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.outstanding_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.outstanding_amount",
+  "transformation": "CAST",
+  "expression": "CAST(outstanding_amount AS decimal(18,2))",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.interest_rate"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.interest_rate",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.interest_rate",
+  "transformation": "CAST",
+  "expression": "CAST(interest_rate AS decimal(6,3))",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_status"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.loan_status",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_status",
+  "transformation": "DIRECT",
+  "expression": "loan_status",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.risk_bucket"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.loan_status",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.risk_bucket",
+  "transformation": "DERIVED",
+  "expression": "CASE WHEN loan_status = 'DEFAULTED' THEN 'HIGH' WHEN outstanding_amount / NULLIF(principal_amount, 0) > 0.8 THEN 'MEDIUM' ELSE 'LOW' END",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.outstanding_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.risk_bucket",
+  "transformation": "DERIVED",
+  "expression": "CASE WHEN loan_status = 'DEFAULTED' THEN 'HIGH' WHEN outstanding_amount / NULLIF(principal_amount, 0) > 0.8 THEN 'MEDIUM' ELSE 'LOW' END",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.principal_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.risk_bucket",
+  "transformation": "DERIVED",
+  "expression": "CASE WHEN loan_status = 'DEFAULTED' THEN 'HIGH' WHEN outstanding_amount / NULLIF(principal_amount, 0) > 0.8 THEN 'MEDIUM' ELSE 'LOW' END",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.repayment_ratio"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.outstanding_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.repayment_ratio",
+  "transformation": "DERIVED",
+  "expression": "1 - outstanding_amount / NULLIF(principal_amount, 0)",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.principal_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.repayment_ratio",
+  "transformation": "DERIVED",
+  "expression": "1 - outstanding_amount / NULLIF(principal_amount, 0)",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.term_months"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.start_date",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.term_months",
+  "transformation": "DERIVED",
+  "expression": "DATEDIFF(month, start_date, maturity_date)",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "pg:bankdb.banking.loans.maturity_date",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio.term_months",
+  "transformation": "DERIVED",
+  "expression": "DATEDIFF(month, start_date, maturity_date)",
+  "pipeline": "PL_CP_Loan_Portfolio",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact",
+  "rel": "HAS_TABLE",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.account_id"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.account_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.account_id",
+  "transformation": "DIRECT",
+  "expression": "account_id",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.txn_date"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.txn_ts",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.txn_date",
+  "transformation": "DERIVED",
+  "expression": "CAST(txn_ts AS date)",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.txn_type"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.txn_type",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.txn_type",
+  "transformation": "DIRECT",
+  "expression": "txn_type",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.channel"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.channel",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.channel",
+  "transformation": "DIRECT",
+  "expression": "channel",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.total_amount"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.total_amount",
+  "transformation": "AGGREGATED",
+  "expression": "SUM(amount)",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.txn_count"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions.txn_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily.txn_count",
+  "transformation": "AGGREGATED",
+  "expression": "COUNT(txn_id)",
+  "pipeline": "PL_CP_Transactions_Daily",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact",
+  "rel": "HAS_TABLE",
+  "to": "fabric:Ontology_Lineage.fact.customer_360"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.customer_id"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.customer_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.customer_id",
+  "transformation": "DIRECT",
+  "expression": "c.customer_id",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.segment"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.segment",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.segment",
+  "transformation": "DIRECT",
+  "expression": "c.segment",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.email_masked"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer.email_masked",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.email_masked",
+  "transformation": "DIRECT",
+  "expression": "c.email_masked",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.account_count"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account.account_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.account_count",
+  "transformation": "AGGREGATED",
+  "expression": "COUNT(DISTINCT a.account_id)",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.total_balance"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account.balance",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.total_balance",
+  "transformation": "AGGREGATED",
+  "expression": "SUM(a.balance)",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.active_loans"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio.loan_id",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.active_loans",
+  "transformation": "AGGREGATED",
+  "expression": "COUNT(l.loan_id)",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.total_outstanding"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio.outstanding_amount",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.total_outstanding",
+  "transformation": "AGGREGATED",
+  "expression": "SUM(l.outstanding_amount)",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "HAS_COLUMN",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.high_risk_loans"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio.risk_bucket",
+  "rel": "FLOWS_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360.high_risk_loans",
+  "transformation": "AGGREGATED",
+  "expression": "SUM(CASE WHEN l.risk_bucket = 'HIGH' THEN 1 ELSE 0 END)",
+  "pipeline": "PL_CP_Customer_360",
+  "activity": "Copy data1",
+  "via": "pipeline"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_Dim",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Customer_Dim.Copy data1"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_Dim.Copy data1",
+  "rel": "READS_FROM",
+  "to": "pg:bankdb.banking.customers"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_Dim.Copy data1",
+  "rel": "WRITES_TO",
+  "to": "fabric:Ontology_Lineage.dim.customer"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Account_Dim",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Account_Dim.Copy data1"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Account_Dim.Copy data1",
+  "rel": "READS_FROM",
+  "to": "pg:bankdb.banking.accounts"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Account_Dim.Copy data1",
+  "rel": "READS_FROM",
+  "to": "pg:bankdb.banking.branches"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Account_Dim.Copy data1",
+  "rel": "WRITES_TO",
+  "to": "fabric:Ontology_Lineage.dim.account"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Loan_Portfolio",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Loan_Portfolio.Copy data1"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Loan_Portfolio.Copy data1",
+  "rel": "READS_FROM",
+  "to": "pg:bankdb.banking.loans"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Loan_Portfolio.Copy data1",
+  "rel": "WRITES_TO",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Transactions_Daily",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Transactions_Daily.Copy data1"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Transactions_Daily.Copy data1",
+  "rel": "READS_FROM",
+  "to": "pg:bankdb.banking.transactions"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Transactions_Daily.Copy data1",
+  "rel": "WRITES_TO",
+  "to": "fabric:Ontology_Lineage.fact.transactions_daily"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Customer_360.Copy data1"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Copy data1",
+  "rel": "READS_FROM",
+  "to": "fabric:Ontology_Lineage.dim.customer"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Copy data1",
+  "rel": "READS_FROM",
+  "to": "fabric:Ontology_Lineage.dim.account"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Copy data1",
+  "rel": "READS_FROM",
+  "to": "fabric:Ontology_Lineage.fact.loan_portfolio"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Copy data1",
+  "rel": "WRITES_TO",
+  "to": "fabric:Ontology_Lineage.fact.customer_360"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Loan_Portfolio",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Loan_Portfolio.Lookup watermark"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Loan_Portfolio.Lookup watermark",
+  "rel": "READS_FROM",
+  "to": "pg:bankdb.banking.loans"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Loan_Portfolio.Lookup watermark",
+  "rel": "PRECEDES",
+  "to": "fabric:pipeline:PL_CP_Loan_Portfolio.Copy data1"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360",
+  "rel": "CONTAINS",
+  "to": "fabric:pipeline:PL_CP_Customer_360.Invoke dimensions"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Invoke dimensions",
+  "rel": "INVOKES",
+  "to": "fabric:pipeline:PL_CP_Customer_Dim"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Invoke dimensions",
+  "rel": "INVOKES",
+  "to": "fabric:pipeline:PL_CP_Account_Dim"
+ },
+ {
+  "from": "fabric:pipeline:PL_CP_Customer_360.Invoke dimensions",
+  "rel": "PRECEDES",
+  "to": "fabric:pipeline:PL_CP_Customer_360.Copy data1"
+ },
+ {
+  "from": "concept:Customer",
+  "rel": "RELATED_TO",
+  "to": "concept:Account",
+  "via": "accounts.customer_id"
+ },
+ {
+  "from": "concept:Customer",
+  "rel": "RELATED_TO",
+  "to": "concept:Loan",
+  "via": "loans.customer_id"
+ },
+ {
+  "from": "concept:Account",
+  "rel": "RELATED_TO",
+  "to": "concept:Transaction",
+  "via": "transactions.account_id"
+ },
+ {
+  "from": "concept:Account",
+  "rel": "RELATED_TO",
+  "to": "concept:Branch",
+  "via": "accounts.branch_id"
+ },
+ {
+  "from": "concept:Loan",
+  "rel": "RELATED_TO",
+  "to": "concept:Account",
+  "via": "loans.account_id"
+ },
+ {
+  "from": "concept:Loan",
+  "rel": "RELATED_TO",
+  "to": "concept:CreditRisk",
+  "via": "loan_portfolio.risk_bucket"
+ },
+ {
+  "from": "pg:bankdb.banking.customers",
+  "rel": "REPRESENTS",
+  "to": "concept:Customer"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.customer",
+  "rel": "REPRESENTS",
+  "to": "concept:Customer"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.customer_360",
+  "rel": "REPRESENTS",
+  "to": "concept:Customer"
+ },
+ {
+  "from": "pg:bankdb.banking.accounts",
+  "rel": "REPRESENTS",
+  "to": "concept:Account"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.dim.account",
+  "rel": "REPRESENTS",
+  "to": "concept:Account"
+ },
+ {
+  "from": "pg:bankdb.banking.vw_customer_accounts",
+  "rel": "REPRESENTS",
+  "to": "concept:Account"
+ },
+ {
+  "from": "pg:bankdb.banking.loans",
+  "rel": "REPRESENTS",
+  "to": "concept:Loan"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "REPRESENTS",
+  "to": "concept:Loan"
+ },
+ {
+  "from": "pg:bankdb.banking.vw_loan_summary",
+  "rel": "REPRESENTS",
+  "to": "concept:Loan"
+ },
+ {
+  "from": "pg:bankdb.banking.transactions",
+  "rel": "REPRESENTS",
+  "to": "concept:Transaction"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.transactions_daily",
+  "rel": "REPRESENTS",
+  "to": "concept:Transaction"
+ },
+ {
+  "from": "pg:bankdb.banking.branches",
+  "rel": "REPRESENTS",
+  "to": "concept:Branch"
+ },
+ {
+  "from": "fabric:Ontology_Lineage.fact.loan_portfolio",
+  "rel": "REPRESENTS",
+  "to": "concept:CreditRisk"
+ }
+]
