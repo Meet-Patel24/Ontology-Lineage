@@ -4,14 +4,54 @@ REM  Lineage Studio - one-click start (Windows / VM)
 REM  Double-click this file. First run installs everything; later runs just
 REM  start the backend (http://localhost:8000) and frontend (http://localhost:5173)
 REM  in their own windows and open the browser. Use stop-app.bat to stop them.
+REM
+REM  This file can live in ANY folder (Desktop, a tools folder, ...). It finds the
+REM  project folder (the one that contains "backend" and "frontend") like this:
+REM    1. a path passed as the first argument:  run-app.bat "D:\Ontology-Lineage"
+REM    2. APP_DIR below, if you fill it in
+REM    3. the folder this file is in
+REM    4. the path remembered in run-app.path.txt (next to this file)
+REM    5. otherwise it asks you to pick the folder once and remembers it.
+REM  To point it at a different copy later, delete run-app.path.txt.
 REM ===========================================================================
 setlocal EnableExtensions
-cd /d "%~dp0"
 title Lineage Studio - launcher
+
+REM Optional: hard-code the project folder here, e.g.  set "APP_DIR=D:\Apps\Ontology-Lineage"
+set "APP_DIR="
 
 echo.
 echo  ==== Lineage Studio ====
 echo.
+
+REM ---- 0. Locate the project folder -----------------------------------------
+set "CFG=%~dp0run-app.path.txt"
+if not "%~1"=="" set "APP_DIR=%~1"
+if defined APP_DIR call :check_dir && goto :dir_found
+if defined APP_DIR echo [warn] "%APP_DIR%" is not a Lineage Studio folder.
+set "APP_DIR=%~dp0"
+call :check_dir && goto :dir_found
+if not exist "%CFG%" goto :ask_dir
+set "APP_DIR="
+set /p APP_DIR=<"%CFG%"
+if defined APP_DIR call :check_dir && goto :dir_found
+echo [warn] The remembered folder "%APP_DIR%" no longer contains Lineage Studio.
+
+:ask_dir
+echo [setup] Where is Lineage Studio? A folder picker will open - choose the folder
+echo         that contains "backend" and "frontend".
+set "APP_DIR="
+for /f "usebackq delims=" %%i in (`powershell -NoProfile -STA -Command "Add-Type -AssemblyName System.Windows.Forms; $d = New-Object System.Windows.Forms.FolderBrowserDialog; $d.Description = 'Select the Lineage Studio folder (contains backend and frontend)'; if ($d.ShowDialog() -eq 'OK') { $d.SelectedPath }"`) do set "APP_DIR=%%i"
+if not defined APP_DIR set /p "APP_DIR=  Or type / paste the folder path here: "
+if not defined APP_DIR goto :no_dir
+call :check_dir && goto :dir_found
+echo [error] "%APP_DIR%" does not contain backend\app\main.py and frontend\package.json.
+goto :ask_dir
+
+:dir_found
+>"%CFG%" echo(%APP_DIR%
+cd /d "%APP_DIR%"
+echo [ok] Project folder: %APP_DIR%
 
 REM ---- 1. Python 3.11+ ------------------------------------------------------
 set "PY="
@@ -80,23 +120,23 @@ copy /y "frontend\package-lock.json" "frontend\node_modules\.installed-lock" >nu
 echo [ok] Frontend packages ready
 
 REM ---- 6. Start backend -----------------------------------------------------
-netstat -ano -p tcp | findstr ":8000 " | findstr LISTENING >nul
+netstat -ano | findstr ":8000 " | findstr LISTENING >nul
 if not errorlevel 1 (
   echo [info] Something is already listening on port 8000 - assuming the backend is running.
   goto :backend_started
 )
 echo [run] Starting backend on http://localhost:8000 ...
-start "Lineage Studio API" cmd /k "cd /d "%~dp0backend" && .venv\Scripts\python.exe -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
+start "Lineage Studio API" cmd /k "cd /d "%APP_DIR%\backend" && .venv\Scripts\python.exe -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
 :backend_started
 
 REM ---- 7. Start frontend ----------------------------------------------------
-netstat -ano -p tcp | findstr ":5173 " | findstr LISTENING >nul
+netstat -ano | findstr ":5173 " | findstr LISTENING >nul
 if not errorlevel 1 (
   echo [info] Something is already listening on port 5173 - assuming the frontend is running.
   goto :frontend_started
 )
 echo [run] Starting frontend on http://localhost:5173 ...
-start "Lineage Studio UI" cmd /k "cd /d "%~dp0frontend" && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"
+start "Lineage Studio UI" cmd /k "cd /d "%APP_DIR%\frontend" && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"
 :frontend_started
 
 REM ---- 8. Wait until both answer, then open the browser ---------------------
@@ -126,6 +166,20 @@ exit /b 0
 :slow
 echo [warn] Servers did not answer within 90 seconds. Check the
 echo        "Lineage Studio API" and "Lineage Studio UI" windows for errors.
+pause
+exit /b 1
+
+:check_dir
+REM Normalise APP_DIR (strip quotes and a trailing backslash) and check it is the project.
+set "APP_DIR=%APP_DIR:"=%"
+if "%APP_DIR:~-1%"=="\" set "APP_DIR=%APP_DIR:~0,-1%"
+if not exist "%APP_DIR%\backend\app\main.py" exit /b 1
+if not exist "%APP_DIR%\frontend\package.json" exit /b 1
+exit /b 0
+
+:no_dir
+echo [error] No project folder chosen. Run this file again and pick the folder
+echo         that contains "backend" and "frontend".
 pause
 exit /b 1
 

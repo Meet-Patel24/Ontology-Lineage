@@ -149,6 +149,16 @@ class Neo4jClient:
             )
         except Neo4jError as exc:
             info["error"] = f"{exc.code}: {exc.message}"
+        except ValueError as exc:
+            # The driver raises ValueError("Cannot resolve address host:port") when DNS lookup fails.
+            log.warning("Neo4j address problem: %s", exc)
+            if "resolve address" in str(exc):
+                info["error"] = (
+                    f"Cannot resolve host '{self.settings.neo4j_host}'. Check NEO4J_URI in .env for typos or the "
+                    "xxxxxxxx placeholder, and check that this machine can reach the internet / DNS."
+                )
+            else:
+                info["error"] = f"Invalid NEO4J_URI: {exc}"
         except Exception as exc:  # noqa: BLE001 - surfaced as status, never as a stack trace
             log.exception("Unexpected error during health check")
             info["error"] = f"Unexpected error: {type(exc).__name__}"
@@ -189,6 +199,10 @@ class Neo4jClient:
                 keys, records, graph, summary, truncated = session.execute_read(work)
         except (ServiceUnavailable, SessionExpired, AuthError, ConfigurationError, OSError) as exc:
             raise DatabaseUnavailable(str(exc)) from exc
+        except ValueError as exc:
+            if "resolve address" not in str(exc):
+                raise
+            raise DatabaseUnavailable(f"Cannot resolve the Neo4j host ({exc}). Check NEO4J_URI and DNS.") from exc
         wall_ms = (time.perf_counter() - started) * 1000
         return QueryResult(keys, records, graph, _summary_to_dict(summary, wall_ms), truncated)
 

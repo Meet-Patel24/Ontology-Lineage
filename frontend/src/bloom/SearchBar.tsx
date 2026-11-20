@@ -138,8 +138,8 @@ export const SearchBar = forwardRef<SearchBarHandle, Props>(function SearchBar({
   const chipColor = (t: Token) => {
     if (t.kind === "label") return perspective?.labels[t.value]?.color ?? hashColor(t.value);
     if (t.kind === "rel") return perspective?.rels[t.value]?.color ?? "#6b7a90";
-    if (t.kind === "phrase") return "#a78bfa";
-    return "#4a5568";
+    if (t.kind === "phrase") return "#AE63E4";
+    return "#94A3B8";
   };
 
   return (
@@ -198,7 +198,7 @@ export const SearchBar = forwardRef<SearchBarHandle, Props>(function SearchBar({
               run();
             }}
             disabled={disabled || running}
-            className="shrink-0 rounded-full p-1.5 text-ink-200 hover:bg-accent hover:text-ink-950 disabled:opacity-40"
+            className="shrink-0 rounded-full p-1.5 text-ink-200 hover:bg-accent hover:text-white disabled:opacity-40"
           >
             {running ? <Loader2 size={16} className="animate-spin" /> : <Play size={16} />}
           </button>
@@ -258,10 +258,10 @@ export const SearchBar = forwardRef<SearchBarHandle, Props>(function SearchBar({
 });
 
 function SuggestionBody({ s, perspective }: { s: Suggestion; perspective: Perspective | null }) {
-  if (s.category === "error") return <span className="text-xs text-red-300">{s.title}</span>;
+  if (s.category === "error") return <span className="text-xs text-red-700">{s.title}</span>;
   const pill = (text: string, color: string, rounded = true) => (
     <span
-      className={`shrink-0 px-2.5 py-0.5 text-xs font-semibold text-ink-950 ${rounded ? "rounded-full" : "rounded"}`}
+      className={`shrink-0 px-2.5 py-0.5 text-xs font-semibold text-[#111827] ${rounded ? "rounded-full" : "rounded"}`}
       style={{ background: color }}
     >
       {text}
@@ -299,7 +299,7 @@ function SuggestionBody({ s, perspective }: { s: Suggestion; perspective: Perspe
       );
       break;
     case "phrase":
-      main = pill(s.title, "#c4b5fd", false);
+      main = pill(s.title, "#D2A8F2", false);
       break;
     default:
       main = <span className="text-xs text-ink-100">{s.title}</span>;
@@ -319,10 +319,10 @@ function TokenChip({ token, color, onRemove, onDirection }: { token: Token; colo
   const text = token.display ?? token.value;
   const style =
     token.kind === "label" || token.kind === "phrase"
-      ? { background: color, color: "#0b0e14" }
+      ? { background: color, color: "#111827" }
       : token.kind === "rel"
-        ? { border: `1px solid ${color}`, color: "#e8ecf2" }
-        : { background: "#252d3b", color: "#e8ecf2" };
+        ? { border: `1px solid ${color}`, color: "#111827" }
+        : { background: "#EEF2F8", color: "#111827" };
   return (
     <span
       className={`group flex items-center gap-1 px-2 py-0.5 text-xs font-semibold ${token.kind === "label" ? "rounded-full" : "rounded"}`}
@@ -341,7 +341,7 @@ function TokenChip({ token, color, onRemove, onDirection }: { token: Token; colo
             onDirection();
           }}
           title="Toggle direction (out / in / both)"
-          className="rounded px-0.5 hover:bg-white/10"
+          className="rounded px-0.5 hover:bg-black/10"
         >
           {dirIcon}
         </button>

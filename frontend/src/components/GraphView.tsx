@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { GraphData, ViewEdge, ViewNode } from "../api/types";
-import { DEFAULT_EDGE_COLOR, PII_RING, START_RING, TRANSFORMATION_COLORS, labelColor, transformationColor } from "../lib/colors";
+import { DEFAULT_EDGE_COLOR, GOVERNS_COLOR, PII_RING, START_RING, TRANSFORMATION_COLORS, labelColor, transformationColor } from "../lib/colors";
 import { downloadBlob, downloadText, timestampSlug } from "../lib/format";
 import { useApp } from "../store/app";
 import { toast } from "../store/toasts";
@@ -49,7 +49,7 @@ interface Props {
 
 type Selected = { kind: "node"; node: ViewNode } | { kind: "edge"; edge: ViewEdge } | null;
 
-const BG = "#0b0e14";
+const BG = "#ffffff";
 
 function truncate(s: string, n: number) {
   return s.length > n ? s.slice(0, n - 1) + "…" : s;
@@ -63,7 +63,7 @@ function buildStyle(shape: "circle" | "box"): StylesheetStyle[] {
       style: {
         "background-color": "data(color)",
         label: "data(display)",
-        "font-family": "Inter, Segoe UI, sans-serif",
+        "font-family": "Poppins, Trebuchet MS, sans-serif",
         "text-valign": "center",
         "text-halign": "center",
         ...(box
@@ -74,7 +74,7 @@ function buildStyle(shape: "circle" | "box"): StylesheetStyle[] {
               "background-opacity": 0.16,
               "border-width": 2,
               "border-color": "data(color)",
-              color: "#e8ecf2",
+              color: "#111827",
               "font-size": 11,
               "text-wrap": "wrap",
               "text-max-width": "180px",
@@ -85,7 +85,7 @@ function buildStyle(shape: "circle" | "box"): StylesheetStyle[] {
               height: 58,
               "border-width": 2,
               "border-color": "data(border)",
-              color: "#0b0e14",
+              color: "#111827",
               "font-size": 9,
               "font-weight": 600,
               "text-wrap": "ellipsis",
@@ -100,7 +100,7 @@ function buildStyle(shape: "circle" | "box"): StylesheetStyle[] {
     },
     {
       selector: "node:selected",
-      style: { "overlay-color": "#4f9cf9", "overlay-opacity": 0.28, "overlay-padding": 6 },
+      style: { "overlay-color": "#001689", "overlay-opacity": 0.28, "overlay-padding": 6 },
     },
     {
       selector: "edge",
@@ -113,7 +113,7 @@ function buildStyle(shape: "circle" | "box"): StylesheetStyle[] {
         "curve-style": "bezier",
         label: "data(display)",
         "font-size": 8,
-        color: "#a6b0c0",
+        color: "#4B5563",
         "text-rotation": "autorotate",
         "text-background-color": BG,
         "text-background-opacity": 0.85,
@@ -121,12 +121,19 @@ function buildStyle(shape: "circle" | "box"): StylesheetStyle[] {
       },
     },
     { selector: "edge[?thick]", style: { width: 2.6 } },
+    { selector: "edge[?governs]", style: { "line-style": "dashed", "line-dash-pattern": [6, 4], width: 1.8, color: GOVERNS_COLOR } },
+    {
+      selector: 'node[label = "PolicyDocument"]',
+      style: box
+        ? { shape: "cut-rectangle", "background-opacity": 0.35, "border-width": 2, "font-weight": 600 }
+        : { shape: "round-tag" },
+    },
     {
       selector: "edge:selected",
-      style: { width: 3.2, "line-color": "#4f9cf9", "target-arrow-color": "#4f9cf9", color: "#e8ecf2" },
+      style: { width: 3.2, "line-color": "#001689", "target-arrow-color": "#001689", color: "#001689" },
     },
     { selector: ".faded", style: { opacity: 0.14 } },
-    { selector: "node.match", style: { "border-color": "#facc15", "border-width": 6 } },
+    { selector: "node.match", style: { "border-color": "#EBAA01", "border-width": 6 } },
   ];
 }
 
@@ -160,8 +167,9 @@ function toElements(data: GraphData, shape: "circle" | "box", hidden: Set<string
         source: e.source,
         target: e.target,
         display: e.label,
-        color: e.type === "FLOWS_TO" ? transformationColor(t) : DEFAULT_EDGE_COLOR,
+        color: e.type === "FLOWS_TO" ? transformationColor(t) : e.type === "GOVERNS" ? GOVERNS_COLOR : DEFAULT_EDGE_COLOR,
         thick: e.type === "FLOWS_TO",
+        governs: e.type === "GOVERNS",
       },
     });
   }
@@ -465,6 +473,7 @@ export function GraphView({
     [data.edges],
   );
   const hasPii = data.nodes.some((n) => n.pii);
+  const hasGoverns = data.edges.some((e) => e.type === "GOVERNS");
 
   const empty = data.nodes.length === 0;
 
@@ -580,7 +589,7 @@ export function GraphView({
               </span>
             )}
           </div>
-          {legendTransformations.length > 0 && (
+          {(legendTransformations.length > 0 || hasGoverns) && (
             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-ink-700 pt-1">
               {legendTransformations.map((t) => (
                 <span key={t} className="flex items-center gap-1">
@@ -588,6 +597,12 @@ export function GraphView({
                   {t}
                 </span>
               ))}
+              {hasGoverns && (
+                <span className="flex items-center gap-1">
+                  <span className="inline-block w-4 border-t-2 border-dashed" style={{ borderColor: GOVERNS_COLOR }} />
+                  GOVERNS (policy)
+                </span>
+              )}
             </div>
           )}
         </div>

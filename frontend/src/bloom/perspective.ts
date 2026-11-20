@@ -3,13 +3,13 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import type { ENode, ERel, ExploreSchema } from "./api";
 import { GENERIC_LABELS } from "./constants";
 
-// Colour-blind-friendly palette (Okabe-Ito + Paul Tol), readable on a dark canvas.
+// Mastek brand palette (primary, secondary and their tints), ordered so neighbours differ in hue.
 export const PALETTE = [
-  "#56B4E9", "#E69F00", "#009E73", "#F0E442", "#CC79A7", "#D55E00", "#88CCEE", "#DDCC77",
-  "#44AA99", "#CC6677", "#AA4499", "#999933", "#0072B2", "#117733", "#882255",
+  "#0099A8", "#EBAA01", "#AE63E4", "#5ECC62", "#0FBDFF", "#001689", "#EE8A2B", "#E0607E",
+  "#2FC4C9", "#F3C64A", "#C99BF0", "#8EDB91", "#5CCFFF", "#3A4FB8", "#F4A261",
 ];
-export const GENERIC_COLOR = "#8a94a6";
-export const DEFAULT_REL_COLOR = "#8a93a3";
+export const GENERIC_COLOR = "#A9B6CB";
+export const DEFAULT_REL_COLOR = "#A0AEC0";
 export const DEFAULT_NODE_SIZE = 48;
 
 export interface LabelStyle {
@@ -257,12 +257,13 @@ export const usePerspectives = create<PerspectiveStore>()(
     {
       name: "lineage-studio.bloom.perspectives",
       storage: createJSONStorage(() => localStorage),
-      version: 2,
-      // v2: Bloom-like defaults (captions inside 48 px circles, grey relationships). Old auto-generated
-      // perspectives are regenerated from the schema; user-created ones are kept.
+      version: 3,
+      // v2: Bloom-like defaults (captions inside 48 px circles, grey relationships).
+      // v3: Mastek brand palette. Old auto-generated perspectives are regenerated from the schema;
+      // user-created ones are kept.
       migrate: (state, version) => {
         const s = state as { perspectives?: Perspective[]; activeId?: string | null };
-        if (version < 2) {
+        if (version < 3) {
           const kept = (s.perspectives ?? []).filter((p) => p.name !== "Default Perspective");
           return { perspectives: kept, activeId: kept[0]?.id ?? null } as never;
         }

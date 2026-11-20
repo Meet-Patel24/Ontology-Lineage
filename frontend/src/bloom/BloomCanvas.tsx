@@ -21,7 +21,7 @@ if (!reg.__bloomRegistered) {
   reg.__bloomRegistered = true;
 }
 
-export const CANVAS_BG = "#16181d";
+export const CANVAS_BG = "#ffffff";
 
 export interface ContextTarget {
   kind: "node" | "rel" | "canvas";
@@ -91,7 +91,7 @@ const STYLE: cytoscape.StylesheetStyle[] = [
       "curve-style": "bezier", // parallel relationships between the same nodes are drawn curved
       label: "data(caption)",
       "font-size": 7,
-      color: "#d6dbe3",
+      color: "#4B5563",
       "text-rotation": "autorotate",
       "text-background-color": CANVAS_BG,
       "text-background-opacity": 0.9,
@@ -100,15 +100,15 @@ const STYLE: cytoscape.StylesheetStyle[] = [
     },
   },
   { selector: ".nolabel", style: { label: "" } },
-  { selector: "node:selected", style: { "border-width": 6, "border-color": "#4f9cf9", "overlay-opacity": 0 } },
-  { selector: "edge:selected", style: { "line-color": "#4f9cf9", "target-arrow-color": "#4f9cf9", width: 2.5 } },
+  { selector: "node:selected", style: { "border-width": 6, "border-color": "#001689", "overlay-opacity": 0 } },
+  { selector: "edge:selected", style: { "line-color": "#001689", "target-arrow-color": "#001689", width: 2.5 } },
   { selector: "node.locked", style: { "border-style": "dashed" } },
   { selector: ".faded", style: { opacity: 0.15 } },
   { selector: ".grey", style: { opacity: 0.12 } },
   { selector: ".gone", style: { display: "none" } },
-  { selector: "node.fresh", style: { "overlay-color": "#facc15", "overlay-opacity": 0.3, "overlay-padding": 8 } },
-  { selector: "edge.fresh", style: { "line-color": "#facc15", "target-arrow-color": "#facc15" } },
-  { selector: "node.flash", style: { "overlay-color": "#facc15", "overlay-opacity": 0.5, "overlay-padding": 12 } },
+  { selector: "node.fresh", style: { "overlay-color": "#EBAA01", "overlay-opacity": 0.3, "overlay-padding": 8 } },
+  { selector: "edge.fresh", style: { "line-color": "#EBAA01", "target-arrow-color": "#EBAA01" } },
+  { selector: "node.flash", style: { "overlay-color": "#EBAA01", "overlay-opacity": 0.5, "overlay-padding": 12 } },
 ];
 
 /** Wrap a caption to at most two short lines with an ellipsis, so it fits inside the circle. */

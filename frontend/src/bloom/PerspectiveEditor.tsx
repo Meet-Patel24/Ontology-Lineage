@@ -224,7 +224,7 @@ function RulesTab({ p, schema, update }: { p: Perspective; schema: ExploreSchema
                   </option>
                 ))}
               </select>
-              <button onClick={() => update((x) => ({ ...x, rules: x.rules.filter((y) => y.id !== r.id) }))} className="text-ink-400 hover:text-red-300" title="Delete rule">
+              <button onClick={() => update((x) => ({ ...x, rules: x.rules.filter((y) => y.id !== r.id) }))} className="text-ink-400 hover:text-red-700" title="Delete rule">
                 <Trash2 size={13} />
               </button>
             </div>

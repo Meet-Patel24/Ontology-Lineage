@@ -261,7 +261,7 @@ function HistoryTab({ onLoad }: { onLoad: (t: string) => void }) {
         >
           <div className="line-clamp-3 whitespace-pre-wrap font-mono text-[11px] text-ink-200">{h.query}</div>
           <div className="mt-1 flex justify-between text-[10px] text-ink-500">
-            <span className={h.ok ? "" : "text-red-400"}>{h.ok ? "ok" : "failed"}</span>
+            <span className={h.ok ? "" : "text-red-600"}>{h.ok ? "ok" : "failed"}</span>
             <span>
               {h.durationMs !== null ? `${h.durationMs} ms · ` : ""}
               {timeAgo(h.at)}
@@ -369,7 +369,7 @@ function Chip({
     <button
       onClick={onClick}
       className={`flex items-center gap-1 px-2 py-0.5 text-[11px] transition hover:brightness-125 ${round ? "rounded-full" : "rounded"} ${
-        color ? "font-semibold text-ink-950" : subtle ? "border border-ink-600 text-ink-200" : "bg-ink-600 text-ink-100"
+        color ? "font-semibold text-[#111827]" : subtle ? "border border-ink-600 text-ink-200" : "bg-ink-600 text-ink-100"
       }`}
       style={color ? { background: color } : undefined}
       title={`${label}: ${count}`}

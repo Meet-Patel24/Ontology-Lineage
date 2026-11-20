@@ -167,7 +167,7 @@ function Item({
   return (
     <button
       onClick={onClick}
-      className={`flex w-full items-center gap-2 px-3 py-1.5 text-left hover:bg-ink-700 ${danger ? "text-red-300" : "text-ink-100"}`}
+      className={`flex w-full items-center gap-2 px-3 py-1.5 text-left hover:bg-ink-700 ${danger ? "text-red-700" : "text-ink-100"}`}
     >
       <span className="w-4 text-ink-400">{icon}</span>
       <span className={`flex-1 truncate ${mono ? "font-mono" : ""}`}>{label}</span>

@@ -15,7 +15,7 @@ export function Modal({ title, children, onClose, width = "w-[640px]" }: { title
     return () => window.removeEventListener("keydown", k);
   }, [onClose]);
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60" onMouseDown={onClose}>
+    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[#001689]/30" onMouseDown={onClose}>
       <div className={`${width} flex max-h-[86vh] max-w-[94vw] flex-col rounded-lg border border-ink-600 bg-ink-900 shadow-2xl`} onMouseDown={(e) => e.stopPropagation()}>
         <header className="flex items-center justify-between border-b border-ink-700 px-4 py-2.5">
           <h2 className="text-sm font-semibold">{title}</h2>
@@ -98,12 +98,12 @@ export function PhraseManager({ onClose }: { onClose: () => void }) {
               </Field>
             );
           })}
-          {error && <div className="rounded border border-red-500/40 bg-red-500/10 px-2 py-1 text-red-200">{error}</div>}
+          {error && <div className="rounded border border-red-500/40 bg-red-500/10 px-2 py-1 text-red-800">{error}</div>}
           <div className="flex justify-end gap-2 pt-2">
             <button onClick={() => setEditing(null)} className="rounded px-3 py-1 text-ink-300 hover:bg-ink-700">
               Cancel
             </button>
-            <button onClick={() => void save()} className="rounded bg-accent px-3 py-1 font-semibold text-ink-950">
+            <button onClick={() => void save()} className="rounded bg-accent px-3 py-1 font-semibold text-white">
               Save
             </button>
           </div>
@@ -120,7 +120,7 @@ export function PhraseManager({ onClose }: { onClose: () => void }) {
           {list?.map((p) => (
             <div key={p.id} className="rounded border border-ink-700 p-2">
               <div className="flex items-center gap-2">
-                <span className="rounded bg-violet-300 px-2 py-0.5 font-semibold text-ink-950">{p.name}</span>
+                <span className="rounded bg-violet-300 px-2 py-0.5 font-semibold text-[#111827]">{p.name}</span>
                 <span className="flex-1 truncate text-ink-400">{p.description}</span>
                 <button
                   title="Edit"
@@ -136,7 +136,7 @@ export function PhraseManager({ onClose }: { onClose: () => void }) {
                     await exploreApi.deletePhrase(p.id).catch((e) => toast.error("Delete failed", (e as Error).message));
                     void load();
                   }}
-                  className="rounded p-1 text-ink-400 hover:text-red-300"
+                  className="rounded p-1 text-ink-400 hover:text-red-700"
                 >
                   <Trash2 size={13} />
                 </button>
@@ -204,7 +204,7 @@ export function OpenSceneDialog({ onOpen, onImport, onClose }: { onOpen: (s: Sav
             >
               <Pencil size={13} />
             </button>
-            <button title="Delete" onClick={() => window.confirm(`Delete scene "${s.name}"?`) && remove(s.id)} className="rounded p-1 text-ink-400 hover:text-red-300">
+            <button title="Delete" onClick={() => window.confirm(`Delete scene "${s.name}"?`) && remove(s.id)} className="rounded p-1 text-ink-400 hover:text-red-700">
               <Trash2 size={13} />
             </button>
           </div>
@@ -263,7 +263,7 @@ export function SettingsDialog({ schema, onRefreshSchema, onClose }: { schema: E
               toast.success("Settings saved");
               onClose();
             }}
-            className="rounded bg-accent px-3 py-1 font-semibold text-ink-950"
+            className="rounded bg-accent px-3 py-1 font-semibold text-white"
           >
             Save
           </button>
@@ -411,7 +411,7 @@ export function FilterPanel({ schema, onClose }: { schema: ExploreSchema | null;
             )}
             <button
               onClick={() => setFilters({ ...filters, conditions: filters.conditions.filter((x) => x.id !== c.id) })}
-              className="ml-auto text-ink-400 hover:text-red-300"
+              className="ml-auto text-ink-400 hover:text-red-700"
               title="Remove"
             >
               <Trash2 size={13} />

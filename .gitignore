@@ -5,3 +5,4 @@
 **/.pytest_cache/
 frontend/dist/
 *.log
+run-app.path.txt

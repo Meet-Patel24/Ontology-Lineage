@@ -36,7 +36,7 @@ export function SchemaPage() {
         <h2 className="text-sm font-semibold">Business ontology</h2>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-1.5 text-xs text-ink-300">
-            <input type="checkbox" checked={includeTables} onChange={(e) => setIncludeTables(e.target.checked)} className="accent-[#4f9cf9]" />
+            <input type="checkbox" checked={includeTables} onChange={(e) => setIncludeTables(e.target.checked)} className="accent-[#001689]" />
             Show tables that REPRESENT each concept
           </label>
           {concepts.data && (

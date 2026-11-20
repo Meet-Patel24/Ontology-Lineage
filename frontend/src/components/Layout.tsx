@@ -35,8 +35,8 @@ export function Sidebar() {
   const navigate = useApp((s) => s.navigate);
   const setShowShortcuts = useApp((s) => s.setShowShortcuts);
   return (
-    <nav className="flex w-14 shrink-0 flex-col items-center gap-1 border-r border-ink-700 bg-ink-900 py-3">
-      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-accent/15 text-accent" title="Lineage Studio">
+    <nav className="flex w-14 shrink-0 flex-col items-center gap-1 bg-gradient-to-b from-[#001689] to-[#00106a] py-3">
+      <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 text-white" title="Lineage Studio">
         <GitFork size={18} />
       </div>
       {NAV.map((n) => (
@@ -46,11 +46,13 @@ export function Sidebar() {
           title={n.label}
           aria-label={n.label}
           className={`group relative flex h-10 w-10 items-center justify-center rounded-lg transition ${
-            page === n.page ? "bg-accent/20 text-accent" : "text-ink-400 hover:bg-ink-800 hover:text-ink-100"
+            page === n.page
+              ? "bg-white text-[#001689] shadow-soft"
+              : "text-white/70 hover:bg-white/15 hover:text-white"
           }`}
         >
           {n.icon}
-          <span className="pointer-events-none absolute left-12 z-50 whitespace-nowrap rounded bg-ink-700 px-2 py-1 text-xs text-ink-100 opacity-0 shadow group-hover:opacity-100">
+          <span className="pointer-events-none absolute left-12 z-50 whitespace-nowrap rounded bg-[#001689] px-2 py-1 text-xs text-white opacity-0 shadow group-hover:opacity-100">
             {n.label}
           </span>
         </button>
@@ -59,7 +61,7 @@ export function Sidebar() {
       <button
         onClick={() => setShowShortcuts(true)}
         title="Keyboard shortcuts (?)"
-        className="flex h-10 w-10 items-center justify-center rounded-lg text-ink-400 hover:bg-ink-800 hover:text-ink-100"
+        className="flex h-10 w-10 items-center justify-center rounded-lg text-white/70 hover:bg-white/15 hover:text-white"
       >
         <Keyboard size={18} />
       </button>
@@ -101,25 +103,27 @@ export function TopBar() {
   const snapshot = health?.mode === "snapshot";
   const connected = !!health?.connected;
   return (
-    <header className="flex h-11 shrink-0 items-center gap-4 border-b border-ink-700 bg-ink-900 px-4 text-xs">
-      <span className="text-sm font-semibold tracking-tight">Lineage Studio</span>
+    <header className="relative flex h-14 shrink-0 items-center gap-4 border-b border-ink-700 bg-white px-4 text-xs">
+      <img src="/mastek-logo.png" alt="Mastek - Trust. Value. Velocity" className="h-9 w-auto select-none" draggable={false} />
+      <span className="h-7 w-px bg-ink-600" />
+      <span className="font-display text-lg font-bold leading-none tracking-tight text-[#001689]">Lineage Studio</span>
       <span className="h-4 w-px bg-ink-700" />
       <span className="flex items-center gap-2" title={health?.error ?? undefined}>
         <span
           className={`inline-block h-2.5 w-2.5 rounded-full ${
-            snapshot ? "bg-amber-400" : connected ? "bg-emerald-400 shadow-[0_0_6px] shadow-emerald-400" : "bg-red-500"
+            snapshot ? "bg-amber-400" : connected ? "bg-emerald-400 shadow-[0_0_6px] shadow-emerald-500" : "bg-red-500"
           }`}
         />
         {health === null ? (
-          <span className="text-red-300">API unreachable</span>
+          <span className="text-red-700">API unreachable</span>
         ) : snapshot ? (
-          <span className="text-amber-300">Snapshot mode (offline data)</span>
+          <span className="text-amber-700">Snapshot mode (offline data)</span>
         ) : connected ? (
           <span>
             Connected <span className="text-ink-400">to</span> <span className="font-mono">{health.host}</span>
           </span>
         ) : (
-          <span className="text-red-300">Disconnected{health.error ? `: ${health.error}` : ""}</span>
+          <span className="text-red-700">Disconnected{health.error ? `: ${health.error}` : ""}</span>
         )}
       </span>
       {health && !snapshot && (
@@ -144,10 +148,11 @@ export function TopBar() {
       <button
         onClick={() => void refresh(true)}
         disabled={busy}
-        className="flex items-center gap-1.5 rounded-md border border-ink-600 px-2.5 py-1 text-ink-200 hover:border-accent hover:text-accent disabled:opacity-50"
+        className="flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 font-semibold text-white hover:bg-[#0099A8] disabled:opacity-50"
       >
         <RefreshCw size={13} className={busy ? "animate-spin" : ""} /> Reconnect
       </button>
+      <span className="absolute inset-x-0 bottom-0 h-[3px] bg-mastek-strip" aria-hidden />
     </header>
   );
 }
@@ -160,11 +165,11 @@ export function Toasts() {
       {toasts.map((t) => {
         const icon =
           t.kind === "success" ? (
-            <CheckCircle2 size={16} className="text-emerald-400" />
+            <CheckCircle2 size={16} className="text-emerald-600" />
           ) : t.kind === "error" ? (
-            <XCircle size={16} className="text-red-400" />
+            <XCircle size={16} className="text-red-600" />
           ) : t.kind === "warning" ? (
-            <AlertTriangle size={16} className="text-amber-400" />
+            <AlertTriangle size={16} className="text-amber-600" />
           ) : (
             <Info size={16} className="text-accent" />
           );
@@ -172,7 +177,7 @@ export function Toasts() {
           <div
             key={t.id}
             role="status"
-            className="pointer-events-auto flex items-start gap-2 rounded-md border border-ink-600 bg-ink-850 px-3 py-2 text-xs shadow-2xl"
+            className="pointer-events-auto flex items-start gap-2 rounded-xl border border-ink-700 bg-white px-3 py-2 text-xs shadow-soft"
           >
             <span className="mt-0.5">{icon}</span>
             <div className="min-w-0 flex-1">
@@ -221,9 +226,9 @@ export function ShortcutsHelp() {
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60" onClick={() => setOpen(false)}>
+    <div className="fixed inset-0 z-[90] flex items-center justify-center bg-[#001689]/30" onClick={() => setOpen(false)}>
       <div
-        className="w-[560px] max-w-[92vw] rounded-lg border border-ink-600 bg-ink-900 p-5 shadow-2xl"
+        className="w-[560px] max-w-[92vw] rounded-2xl border border-ink-700 bg-white p-5 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-3 flex items-center justify-between">

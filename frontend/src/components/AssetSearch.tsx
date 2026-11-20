@@ -87,7 +87,7 @@ export function AssetSearch({ value, onSelect, placeholder = "Search tables, vie
               className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs ${i === active ? "bg-ink-700" : ""}`}
             >
               <span
-                className="w-24 shrink-0 rounded px-1.5 py-0.5 text-center text-[10px] font-semibold text-ink-950"
+                className="w-24 shrink-0 rounded px-1.5 py-0.5 text-center text-[10px] font-semibold text-[#111827]"
                 style={{ background: labelColor(r.label) }}
               >
                 {r.label}

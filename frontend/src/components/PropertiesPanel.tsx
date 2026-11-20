@@ -44,7 +44,7 @@ export function PropertyList({ props }: { props: Record<string, unknown> }) {
               <CopyBtn text={text} what={k} />
             </dt>
             <dd
-              className={`break-words text-xs ${code && v !== null ? "mt-0.5 whitespace-pre-wrap rounded bg-ink-950 p-1.5 font-mono text-[11px] text-emerald-300" : "text-ink-100"}`}
+              className={`break-words text-xs ${code && v !== null ? "mt-0.5 whitespace-pre-wrap rounded bg-ink-950 p-1.5 font-mono text-[11px] text-emerald-700" : "text-ink-100"}`}
             >
               {v === null ? <span className="text-ink-500">null</span> : text}
             </dd>
@@ -85,14 +85,14 @@ export function PropertiesPanel({
                 {selected.node.labels.map((l) => (
                   <span
                     key={l}
-                    className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-ink-950"
+                    className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-[#111827]"
                     style={{ background: labelColor(l) }}
                   >
                     {l}
                   </span>
                 ))}
                 {selected.node.pii && (
-                  <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] font-semibold text-red-300">PII</span>
+                  <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-[10px] font-semibold text-red-700">PII</span>
                 )}
               </div>
             </>
@@ -103,7 +103,7 @@ export function PropertiesPanel({
                   className="rounded px-1.5 py-0.5 font-mono text-[11px] font-semibold"
                   style={{
                     background: transformationColor(selected.edge.properties.transformation) + "33",
-                    color: "#e8ecf2",
+                    color: "#111827",
                   }}
                 >
                   :{selected.edge.type}

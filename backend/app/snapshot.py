@@ -19,7 +19,7 @@ from typing import Any, Iterable
 from .cypher import Direction
 from .graphmodel import GENERIC_LABEL, GEdge, GNode, SubGraph, primary_label
 
-SEARCH_LABELS = {"Table", "View", "Column", "Pipeline", "BusinessConcept"}
+SEARCH_LABELS = {"Table", "View", "Column", "Pipeline", "BusinessConcept", "PolicyDocument"}
 
 
 class SnapshotRepository:
@@ -106,7 +106,7 @@ class SnapshotRepository:
         for n in self.nodes.values():
             if not SEARCH_LABELS.intersection(n.labels):
                 continue
-            name = str(n.props.get("name") or "").lower()
+            name = str(n.props.get("name") or n.props.get("title") or "").lower()
             if q in name or q in str(n.props.get("full_name") or "").lower() or q in n.id.lower():
                 rank = 0 if name == q else 1 if name.startswith(q) else 2
                 hits.append((rank, len(n.id), n))
@@ -121,7 +121,26 @@ class SnapshotRepository:
         if start.label == "BusinessConcept":
             tables = [e.source for e in self._in(start.id, "REPRESENTS")]
             return {e.target for t in tables for e in self._out(t, "HAS_COLUMN")}
+        if start.label == "PolicyDocument":
+            seeds: set[str] = set()
+            for g in self._governed(start.id):
+                if self.nodes[g.target].label == "Column":
+                    seeds.add(g.target)
+                seeds.update(e.target for e in self._out(g.target, "HAS_COLUMN"))
+            return seeds
         return set()
+
+    def _governed(self, doc_id: str) -> list[GEdge]:
+        return [g for c in self._out(doc_id, "HAS_CHUNK") for g in self._out(c.target, "GOVERNS")]
+
+    def governing_policies(self, ids: list[str]) -> SubGraph:
+        sub = SubGraph()
+        for asset in ids:
+            for g in self._in(asset, "GOVERNS"):
+                for h in self._in(g.source, "HAS_CHUNK"):
+                    self._add_edge(sub, h)
+                    self._add_edge(sub, g)
+        return sub
 
     def lineage(self, start: GNode, direction: Direction, depth: int) -> SubGraph:
         sub = SubGraph()
@@ -148,6 +167,13 @@ class SnapshotRepository:
         if start.label == "BusinessConcept":
             for e in self._in(start.id, "REPRESENTS"):
                 self._add_edge(sub, e)
+        if start.label == "PolicyDocument":
+            for c in self._out(start.id, "HAS_CHUNK"):
+                for g in self._out(c.target, "GOVERNS"):
+                    self._add_edge(sub, c)
+                    self._add_edge(sub, g)
+                    if self.nodes[g.target].label == "Column":
+                        self._add_owner(sub, g.target)
         if start.label == "Pipeline":
             for c in self._out(start.id, "CONTAINS"):
                 for e in self._out(c.target, "READS_FROM", "WRITES_TO"):

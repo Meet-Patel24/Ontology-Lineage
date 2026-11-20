@@ -144,6 +144,32 @@ def inline_params(query: str, params: dict[str, Any]) -> str:
     return query
 
 
+def add_policies(repo: "Repository", sub: SubGraph, view_sub: SubGraph, start: GNode, level: str) -> int:
+    """Overlay the policy documents governing the assets of a lineage view.
+
+    Table level: policies on every table / view shown (column governance rolls up to the table).
+    Column level: policies on the start node, its own columns and the tables shown, so the
+    graph stays readable. Starting from a policy document shows only that document.
+    """
+    owners = sub.owner_map()
+    if level == "table" or start.label == "PolicyDocument":
+        ids = {n.id for n in sub.nodes.values() if n.label in ("Table", "View", "Column")}
+    else:
+        seeds = lineage.seed_columns(sub, start)
+        ids = {start.id, *seeds} | {owners[s] for s in seeds if s in owners}
+        ids |= {n.id for n in view_sub.nodes.values() if n.label in ("Table", "View")}
+        ids |= {c for c, tbl in owners.items() if tbl in view_sub.nodes}
+    try:
+        policies = repo.governing_policies(sorted(ids))
+    except DatabaseUnavailable:
+        raise
+    except Exception:  # noqa: BLE001 - policies are an optional overlay; never fail the lineage
+        log.exception("Could not load governing policies")
+        return 0
+    only = start.id if start.label == "PolicyDocument" else None
+    return lineage.attach_policies(view_sub, policies, owners, only_doc=only)
+
+
 def search_row(n: GNode) -> dict[str, Any]:
     v = node_view(n)
     return {
@@ -314,6 +340,7 @@ def create_app(
         direction: DirectionParam = "both",
         depth: int = Query(3, ge=1, le=6),
         level: LevelParam = "column",
+        policies: bool = Query(True, description="Add the policy documents that govern the assets shown"),
         repo: Repository = Depends(get_repo),
     ) -> dict[str, Any]:
         start = resolve(repo, id)
@@ -322,6 +349,7 @@ def create_app(
             view_sub, start_ids = lineage.table_level(sub, start)
         else:
             view_sub, start_ids = lineage.column_level(sub, start), {start.id}
+        policy_count = add_policies(repo, sub, view_sub, start, level) if policies else 0
         view = to_view(view_sub, start_ids=start_ids)
         return {
             **view,
@@ -332,6 +360,7 @@ def create_app(
                 "direction": direction,
                 "depth": depth,
                 "level": level,
+                "policies": policy_count,
             },
             "cypher": inline_params(cypher.lineage(start.label, direction, depth), {"id": start.id}),
         }
@@ -341,6 +370,7 @@ def create_app(
         id: str = Query(min_length=1, max_length=1000),
         depth: int = Query(6, ge=1, le=6),
         level: LevelParam = "column",
+        policies: bool = Query(True, description="Add the policy documents that govern the assets shown"),
         repo: Repository = Depends(get_repo),
     ) -> dict[str, Any]:
         start = resolve(repo, id)
@@ -350,6 +380,8 @@ def create_app(
             view_sub, start_ids = lineage.table_level(sub, start)
         else:
             view_sub, start_ids = lineage.column_level(sub, start), {start.id}
+        if policies:
+            summary = {**summary, "policies": add_policies(repo, sub, view_sub, start, level)}
         return {
             **to_view(view_sub, start_ids=start_ids),
             "start": node_view(start, {start.id}),

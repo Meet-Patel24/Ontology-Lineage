@@ -416,7 +416,7 @@ export function BloomPage() {
     return (
       <div className="flex h-full items-center justify-center p-8">
         <div className="max-w-md text-center text-sm text-ink-300">
-          <WifiOff className="mx-auto mb-3 text-amber-400" />
+          <WifiOff className="mx-auto mb-3 text-amber-600" />
           {EXPLORER_MENU_LABEL} needs a live Neo4j connection. It is not available in snapshot mode.
         </div>
       </div>
@@ -424,7 +424,7 @@ export function BloomPage() {
   }
 
   return (
-    <div className="flex h-full flex-col" style={{ background: "#16181d" }}>
+    <div className="flex h-full flex-col" style={{ background: "#ffffff" }}>
       {/* top bar */}
       {!presentation && (
         <div className="flex h-12 shrink-0 items-center gap-2 border-b border-ink-700 bg-ink-900 px-3 text-sm">
@@ -543,7 +543,7 @@ export function BloomPage() {
         />
 
         {schemaError && (
-          <div className="absolute left-1/2 top-3 z-20 -translate-x-1/2 rounded border border-red-500/40 bg-red-500/10 px-3 py-1.5 text-xs text-red-200">
+          <div className="absolute left-1/2 top-3 z-20 -translate-x-1/2 rounded border border-red-500/40 bg-red-500/10 px-3 py-1.5 text-xs text-red-800">
             Could not load the schema: {schemaError}
           </div>
         )}
@@ -567,9 +567,9 @@ export function BloomPage() {
         )}
 
         {banner && !presentation && (
-          <div className="absolute left-1/2 top-20 z-20 flex -translate-x-1/2 items-center gap-2 rounded border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-200">
+          <div className="absolute left-1/2 top-20 z-20 flex -translate-x-1/2 items-center gap-2 rounded border border-amber-500/40 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-800">
             {banner}
-            <button onClick={() => setBanner(null)} className="text-amber-300 hover:text-amber-100">
+            <button onClick={() => setBanner(null)} className="text-amber-700 hover:text-amber-900">
               ✕
             </button>
           </div>
@@ -578,7 +578,7 @@ export function BloomPage() {
         {diagnosis && !presentation && (
           <div className="absolute left-4 top-[76px] z-20 w-[560px] max-w-[calc(100vw-120px)] rounded-lg border border-amber-500/40 bg-ink-900/[0.97] px-3 py-2 text-xs shadow-xl">
             <div className="flex items-start gap-2">
-              <span className="mt-0.5 shrink-0 font-semibold text-amber-300">No results.</span>
+              <span className="mt-0.5 shrink-0 font-semibold text-amber-700">No results.</span>
               <span className="flex-1 text-ink-100" data-diagnosis>
                 {diagnosis.message}
               </span>

@@ -68,7 +68,7 @@ export function Inspector({
           <div className="text-sm font-semibold">{v?.caption}</div>
           <div className="mt-1 flex flex-wrap gap-1">
             {single.labels.map((l) => (
-              <span key={l} className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-ink-950" style={{ background: labelColor(perspective, l) }}>
+              <span key={l} className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-[#111827]" style={{ background: labelColor(perspective, l) }}>
                 {l}
               </span>
             ))}
@@ -208,7 +208,7 @@ function PropRow({ k, v }: { k: string; v: unknown }) {
       {long ? (
         <dd>
           <pre
-            className={`mt-0.5 whitespace-pre-wrap break-words rounded bg-ink-950 p-1.5 font-mono text-[11px] text-emerald-200 ${open ? "" : "max-h-24 overflow-hidden"}`}
+            className={`mt-0.5 whitespace-pre-wrap break-words rounded bg-ink-950 p-1.5 font-mono text-[11px] text-emerald-800 ${open ? "" : "max-h-24 overflow-hidden"}`}
           >
             {text}
           </pre>
@@ -291,7 +291,7 @@ export function CardList({
                     style={{ top: vi.start, height: vi.size }}
                     title={st === "gone" ? "Hidden" : undefined}
                   >
-                    <span className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold text-ink-950" style={{ background: it.color }}>
+                    <span className="shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold text-[#111827]" style={{ background: it.color }}>
                       {it.label}
                     </span>
                     <span className="truncate">{it.caption}</span>
@@ -405,7 +405,7 @@ export function Minimap({ getCy }: { getCy: () => Core | null }) {
         ctx.fill();
       });
       const ext = cy.extent();
-      ctx.strokeStyle = "#4f9cf9";
+      ctx.strokeStyle = "#001689";
       ctx.lineWidth = 1.5;
       ctx.strokeRect(ext.x1 * s + ox, ext.y1 * s + oy, ext.w * s, ext.h * s);
     };

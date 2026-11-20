@@ -13,7 +13,7 @@ function NodeChip({ node }: { node: NeoNode }) {
         title="Show properties"
         className="inline-flex max-w-full items-center gap-1 rounded-full border border-ink-600 bg-ink-850 py-0.5 pl-0.5 pr-2 text-[11px] hover:border-ink-400"
       >
-        <span className="rounded-full px-1.5 text-[10px] font-semibold text-ink-950" style={{ background: labelColor(label) }}>
+        <span className="rounded-full px-1.5 text-[10px] font-semibold text-[#111827]" style={{ background: labelColor(label) }}>
           {label}
         </span>
         <span className="truncate">{captionOf(node.properties, node.elementId)}</span>
@@ -47,7 +47,7 @@ function RelChip({ rel }: { rel: NeoRelationship }) {
 
 function JsonBlock({ value }: { value: unknown }) {
   return (
-    <pre className="mt-1 max-h-64 overflow-auto whitespace-pre-wrap rounded bg-ink-950 p-1.5 font-mono text-[10px] text-emerald-300">
+    <pre className="mt-1 max-h-64 overflow-auto whitespace-pre-wrap rounded bg-ink-950 p-1.5 font-mono text-[10px] text-emerald-700">
       {JSON.stringify(value, null, 2)}
     </pre>
   );
@@ -56,8 +56,8 @@ function JsonBlock({ value }: { value: unknown }) {
 export function ValueCell({ value }: { value: unknown }) {
   if (value === null || value === undefined) return <span className="text-ink-500">null</span>;
   if (typeof value === "boolean")
-    return <span className={value ? "text-emerald-400" : "text-rose-400"}>{String(value)}</span>;
-  if (typeof value === "number") return <span className="font-mono text-amber-300">{value}</span>;
+    return <span className={value ? "text-emerald-600" : "text-rose-600"}>{String(value)}</span>;
+  if (typeof value === "number") return <span className="font-mono text-amber-700">{value}</span>;
   if (typeof value === "string") return <span className="whitespace-pre-wrap break-words">{value}</span>;
   if (isNeoNode(value)) return <NodeChip node={value} />;
   if (isNeoRel(value)) return <RelChip rel={value} />;

@@ -69,7 +69,7 @@ export function ImpactAnalysis() {
         accessorKey: "expression",
         header: "Expression",
         size: 320,
-        cell: (c) => <code className="whitespace-pre-wrap font-mono text-[11px] text-emerald-300">{(c.getValue() as string) ?? ""}</code>,
+        cell: (c) => <code className="whitespace-pre-wrap font-mono text-[11px] text-emerald-700">{(c.getValue() as string) ?? ""}</code>,
       },
     ],
     [],
@@ -103,7 +103,7 @@ export function ImpactAnalysis() {
           />
         </Field>
         <Field label={`Depth: ${depth}`}>
-          <input type="range" min={1} max={6} value={depth} onChange={(e) => setDepth(Number(e.target.value))} className="w-36 accent-[#4f9cf9]" />
+          <input type="range" min={1} max={6} value={depth} onChange={(e) => setDepth(Number(e.target.value))} className="w-36 accent-[#001689]" />
         </Field>
       </div>
 
@@ -112,7 +112,7 @@ export function ImpactAnalysis() {
       {start && s && (
         <div className="mb-4 rounded-lg border border-ink-700 bg-ink-900 p-4">
           <div className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-ink-950" style={{ background: labelColor(start.label) }}>
+            <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-[#111827]" style={{ background: labelColor(start.label) }}>
               {start.label}
             </span>
             <span className="font-mono">
@@ -138,7 +138,7 @@ export function ImpactAnalysis() {
               <div className="mb-1 text-[10px] uppercase tracking-wide text-ink-400">Pipelines</div>
               <div className="flex flex-wrap gap-1">
                 {s.pipeline_names.length ? (
-                  s.pipeline_names.map((p) => <Badge key={p} color="#f472b6" className="normal-case">{p}</Badge>)
+                  s.pipeline_names.map((p) => <Badge key={p} color="#AE63E4" className="normal-case">{p}</Badge>)
                 ) : (
                   <span className="text-ink-500">none</span>
                 )}

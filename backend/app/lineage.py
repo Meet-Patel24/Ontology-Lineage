@@ -65,7 +65,7 @@ def table_level(sub: SubGraph, start: GNode) -> tuple[SubGraph, set[str]]:
     owners = sub.owner_map()
     out = SubGraph()
     for n in sub.nodes.values():
-        if n.label != "Column":
+        if n.label not in ("Column", "PolicyChunk"):  # policy sections are collapsed into GOVERNS edges
             out.add_node(n)
 
     grouped: dict[tuple[str, str], list[GEdge]] = defaultdict(list)
@@ -328,3 +328,70 @@ def pipelines(sub: SubGraph) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         "targets": len({s for r in rows for s in r["writes_to"]}),
     }
     return rows, summary
+
+
+# ---------------------------------------------------------------------------
+# Governing policies
+# ---------------------------------------------------------------------------
+
+POLICY_LABEL = "PolicyDocument"
+
+
+def attach_policies(
+    view: SubGraph,
+    policies: SubGraph,
+    owners: dict[str, str] | None = None,
+    only_doc: str | None = None,
+) -> int:
+    """Add the policy documents that govern assets shown in ``view``.
+
+    ``policies`` holds ``(PolicyDocument)-[:HAS_CHUNK]->(PolicyChunk)-[:GOVERNS]->(asset)`` paths.
+    Chunks are collapsed: one ``GOVERNS`` edge per (document, asset) carrying the governing
+    section headings. With ``owners`` (column -> table), a governed column is rolled up to its
+    table whenever that table is shown, which keeps the graph readable; the column names are
+    kept on the edge.
+    Returns the number of policy documents added.
+    """
+    owners = owners or {}
+    doc_of_chunk = {e.target: e.source for e in policies.edges_of("HAS_CHUNK")}
+    grouped: dict[tuple[str, str], list[GEdge]] = defaultdict(list)
+    for e in policies.edges_of("GOVERNS"):
+        doc = doc_of_chunk.get(e.source)
+        if doc is None or (only_doc is not None and doc != only_doc):
+            continue
+        owner = owners.get(e.target)
+        target = owner if owner in view.nodes else e.target
+        if target not in view.nodes:
+            continue
+        grouped[(doc, target)].append(e)
+
+    docs: set[str] = set()
+    for (doc, target), edges in grouped.items():
+        if doc not in view.nodes:
+            view.add_node(policies.nodes[doc])
+        docs.add(doc)
+        sections = sorted({_heading(policies, e.source) for e in edges})
+        columns = sorted({_col_name(policies, e.target) for e in edges if e.target != target})
+        scores = [float(e.props["score"]) for e in edges if isinstance(e.props.get("score"), (int, float))]
+        view.add_edge(
+            GEdge(
+                key=f"gov:{doc}->{target}",
+                source=doc,
+                target=target,
+                type="GOVERNS",
+                props={
+                    "policy": policies.nodes[doc].props.get("title"),
+                    "sections": sections,
+                    **({"columns": columns} if columns else {}),
+                    **({"score": round(max(scores), 4)} if scores else {}),
+                    "method": edges[0].props.get("method"),
+                    "label": "GOVERNS",
+                },
+            )
+        )
+    return len(docs)
+
+
+def _heading(sub: SubGraph, chunk_id: str) -> str:
+    n = sub.nodes.get(chunk_id)
+    return str((n.props.get("heading") or n.props.get("section_path")) if n else chunk_id)

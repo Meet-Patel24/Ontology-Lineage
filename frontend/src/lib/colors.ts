@@ -1,20 +1,25 @@
 // Consistent colours for labels and transformations across all graphs.
 
 export const LABEL_COLORS: Record<string, string> = {
-  Database: "#f59e0b",
-  Schema: "#d97706",
-  Table: "#4f9cf9",
-  View: "#22d3ee",
-  Column: "#94a3b8",
-  Lakehouse: "#10b981",
-  Warehouse: "#059669",
-  Pipeline: "#f472b6",
-  Activity: "#fb7185",
-  BusinessConcept: "#a78bfa",
-  Classification: "#ef4444",
+  Database: "#EBAA01",
+  Schema: "#F3C64A",
+  Table: "#0FBDFF",
+  View: "#2FC4C9",
+  Column: "#A9B6CB",
+  Lakehouse: "#5ECC62",
+  Warehouse: "#8EDB91",
+  Pipeline: "#AE63E4",
+  Activity: "#C99BF0",
+  BusinessConcept: "#F4A261",
+  Classification: "#EF6B6B",
+  PolicyDocument: "#F59FBC",
+  PolicyChunk: "#FBCFE0",
 };
 
-const EXTRA = ["#facc15", "#2dd4bf", "#c084fc", "#fb923c", "#84cc16", "#e879f9", "#38bdf8", "#fda4af"];
+/** Policy document -> governed asset (dashed). */
+export const GOVERNS_COLOR = "#C2255C";
+
+const EXTRA = ["#7FD8E0", "#F7D46B", "#D2A8F2", "#F4A261", "#A3E3A5", "#7FA8FF", "#5CCFFF", "#F7A8B8"];
 
 export function labelColor(label: string): string {
   if (LABEL_COLORS[label]) return LABEL_COLORS[label];
@@ -25,20 +30,20 @@ export function labelColor(label: string): string {
 
 export const TRANSFORMATION_COLORS: Record<string, string> = {
   MASKED: "#ef4444",
-  AGGREGATED: "#a855f7",
-  DERIVED: "#3b82f6",
-  DIRECT: "#9ca3af",
-  CAST: "#64748b",
+  AGGREGATED: "#AE63E4",
+  DERIVED: "#0099A8",
+  DIRECT: "#6B7280",
+  CAST: "#475569",
 };
 
-export const DEFAULT_EDGE_COLOR = "#5b6577";
+export const DEFAULT_EDGE_COLOR = "#94A3B8";
 
 export function transformationColor(t: unknown): string {
   return (typeof t === "string" && TRANSFORMATION_COLORS[t]) || DEFAULT_EDGE_COLOR;
 }
 
 export const PII_RING = "#ef4444";
-export const START_RING = "#facc15";
+export const START_RING = "#EBAA01";
 
 const LABEL_PRIORITY = [
   "Column",
@@ -52,6 +57,8 @@ const LABEL_PRIORITY = [
   "Warehouse",
   "BusinessConcept",
   "Classification",
+  "PolicyDocument",
+  "PolicyChunk",
 ];
 
 /** Most specific label of a node (ignoring the generic :Asset label). */

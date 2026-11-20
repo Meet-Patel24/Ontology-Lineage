@@ -14,22 +14,44 @@ Direction = Literal["upstream", "downstream", "both"]
 
 COLUMN_SEARCH_LABELS = ("Table", "View", "Column", "Pipeline", "BusinessConcept")
 
-SEARCH = """MATCH (n:Asset)
-WHERE (n:Table OR n:View OR n:Column OR n:Pipeline OR n:BusinessConcept)
-  AND (toLower(coalesce(n.name, '')) CONTAINS $q
-       OR toLower(coalesce(n.full_name, '')) CONTAINS $q
-       OR toLower(n.id) CONTAINS $q)
+SEARCH = """CALL {
+  MATCH (n:Asset)
+  WHERE (n:Table OR n:View OR n:Column OR n:Pipeline OR n:BusinessConcept)
+    AND (toLower(coalesce(n.name, '')) CONTAINS $q
+         OR toLower(coalesce(n.full_name, '')) CONTAINS $q
+         OR toLower(n.id) CONTAINS $q)
+  RETURN n, toLower(n.name) AS title, n.id AS key
+  UNION
+  MATCH (n:PolicyDocument)
+  WHERE toLower(coalesce(n.title, '')) CONTAINS $q
+     OR toLower(coalesce(n.doc_id, '')) CONTAINS $q
+     OR toLower(coalesce(n.source_file, '')) CONTAINS $q
+  RETURN n, toLower(n.title) AS title, n.doc_id AS key
+}
 RETURN n
-ORDER BY CASE WHEN toLower(n.name) = $q THEN 0
-              WHEN toLower(n.name) STARTS WITH $q THEN 1
-              ELSE 2 END, size(n.id)
+ORDER BY CASE WHEN title = $q THEN 0
+              WHEN title STARTS WITH $q THEN 1
+              WHEN n:PolicyDocument THEN 2
+              ELSE 3 END, size(key)
 LIMIT $limit"""
 
-RESOLVE = """MATCH (n:Asset)
-WHERE n.id = $ref OR n.full_name = $ref OR n.id ENDS WITH $suffix
+RESOLVE = """CALL {
+  MATCH (n:Asset)
+  WHERE n.id = $ref OR n.full_name = $ref OR n.id ENDS WITH $suffix
+  RETURN n, CASE WHEN n.id = $ref THEN 0 WHEN n.full_name = $ref THEN 1 ELSE 2 END AS rank, n.id AS key
+  UNION
+  MATCH (n:PolicyDocument)
+  WHERE n.doc_id = $ref OR n.title = $ref
+  RETURN n, 0 AS rank, n.doc_id AS key
+}
 RETURN n
-ORDER BY CASE WHEN n.id = $ref THEN 0 WHEN n.full_name = $ref THEN 1 ELSE 2 END, size(n.id)
+ORDER BY rank, size(key)
 LIMIT 1"""
+
+# Policy sections that govern any of the given tables / views / columns.
+GOVERNING_POLICIES = """MATCH p = (:PolicyDocument)-[:HAS_CHUNK]->(:PolicyChunk)-[:GOVERNS]->(x:Asset)
+WHERE x.id IN $ids
+RETURN p"""
 
 # For every column on a path, also return the HAS_COLUMN path to its owning table.
 _OWNERS = "[x IN coalesce(nodes(p), [s]) | [h = (:Asset)-[:HAS_COLUMN]->(x) | h]] AS owners"
@@ -50,6 +72,12 @@ def _seed_pattern(label: str) -> str | None:
         return "(:Asset {id: $id})-[:HAS_COLUMN]->(s:Column)"
     if label == "BusinessConcept":
         return "(:BusinessConcept {id: $id})<-[:REPRESENTS]-(:Asset)-[:HAS_COLUMN]->(s:Column)"
+    if label == "PolicyDocument":
+        # Columns the policy governs directly, plus the columns of the tables it governs.
+        return (
+            "(:PolicyDocument {doc_id: $id})-[:HAS_CHUNK]->(:PolicyChunk)-[:GOVERNS]->(:Asset)"
+            "-[:HAS_COLUMN*0..1]->(s:Column)"
+        )
     return None
 
 
@@ -57,7 +85,8 @@ def lineage(label: str, direction: Direction, depth: int) -> str:
     d = _check_depth(depth)
     down = direction in ("downstream", "both")
     up = direction in ("upstream", "both")
-    branches = ["MATCH (start:Asset {id: $id})\nRETURN start AS s, null AS p, [] AS owners"]
+    start = "(start:PolicyDocument {doc_id: $id})" if label == "PolicyDocument" else "(start:Asset {id: $id})"
+    branches = [f"MATCH {start}\nRETURN start AS s, null AS p, [] AS owners"]
 
     seed = _seed_pattern(label)
     if seed:
@@ -81,6 +110,11 @@ def lineage(label: str, direction: Direction, depth: int) -> str:
     if label == "BusinessConcept":
         branches.append(
             "MATCH p = (:Asset)-[:REPRESENTS]->(:BusinessConcept {id: $id})\nRETURN null AS s, p, [] AS owners"
+        )
+    if label == "PolicyDocument":
+        branches.append(
+            "MATCH p = (:PolicyDocument {doc_id: $id})-[:HAS_CHUNK]->(:PolicyChunk)-[:GOVERNS]->(:Asset)\n"
+            "RETURN null AS s, p, [x IN nodes(p) | [h = (:Asset)-[:HAS_COLUMN]->(x) | h]] AS owners"
         )
     if label == "Pipeline":
         branches.append(
@@ -124,7 +158,7 @@ OPTIONAL MATCH p = (n)-[]-()
 RETURN n, p
 LIMIT $limit"""
 
-NEIGHBORS_BY_ASSET_ID = """MATCH (n:Asset {id: $id})
+NEIGHBORS_BY_ASSET_ID = """MATCH (n) WHERE (n:Asset AND n.id = $id) OR (n:PolicyDocument AND n.doc_id = $id)
 OPTIONAL MATCH p = (n)-[]-()
 RETURN n, p
 LIMIT $limit"""

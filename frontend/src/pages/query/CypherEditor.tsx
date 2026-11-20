@@ -24,20 +24,20 @@ interface Props {
 
 const theme = EditorView.theme(
   {
-    "&": { backgroundColor: "transparent", color: "#e8ecf2", fontSize: "13px" },
-    ".cm-content": { fontFamily: "JetBrains Mono, Cascadia Code, Consolas, monospace", caretColor: "#4f9cf9", padding: "6px 0" },
+    "&": { backgroundColor: "transparent", color: "#111827", fontSize: "13px" },
+    ".cm-content": { fontFamily: "JetBrains Mono, Cascadia Code, Consolas, monospace", caretColor: "#001689", padding: "6px 0" },
     "&.cm-focused": { outline: "none" },
-    ".cm-cursor": { borderLeftColor: "#4f9cf9", borderLeftWidth: "2px" },
-    ".cm-selectionBackground, &.cm-focused .cm-selectionBackground, ::selection": { backgroundColor: "#2b5d9c66 !important" },
+    ".cm-cursor": { borderLeftColor: "#001689", borderLeftWidth: "2px" },
+    ".cm-selectionBackground, &.cm-focused .cm-selectionBackground, ::selection": { backgroundColor: "#0FBDFF40 !important" },
     ".cm-activeLine": { backgroundColor: "transparent" },
-    ".cm-placeholder": { color: "#5a6578" },
-    ".cm-tooltip": { backgroundColor: "#1a202c", border: "1px solid #323c4e", color: "#e8ecf2" },
-    ".cm-tooltip-autocomplete > ul > li[aria-selected]": { backgroundColor: "#2b5d9c", color: "#fff" },
-    ".cm-completionDetail": { color: "#7a8699", fontStyle: "normal", marginLeft: "8px" },
-    ".cm-matchingBracket": { backgroundColor: "#4f9cf933", outline: "none" },
+    ".cm-placeholder": { color: "#94A3B8" },
+    ".cm-tooltip": { backgroundColor: "#ffffff", border: "1px solid #CDD5E1", color: "#111827" },
+    ".cm-tooltip-autocomplete > ul > li[aria-selected]": { backgroundColor: "#001689", color: "#fff" },
+    ".cm-completionDetail": { color: "#6B7280", fontStyle: "normal", marginLeft: "8px" },
+    ".cm-matchingBracket": { backgroundColor: "#0FBDFF33", outline: "none" },
     ".cm-scroller": { maxHeight: "40vh", overflow: "auto" },
   },
-  { dark: true },
+  { dark: false },
 );
 
 export const CypherEditor = forwardRef<CypherEditorHandle, Props>(function CypherEditor(

@@ -10,7 +10,7 @@ from typing import Any, Protocol
 
 from . import cypher
 from .cypher import Direction
-from .graphmodel import GNode, SubGraph, from_neo4j_graph
+from .graphmodel import GNode, SubGraph, from_neo4j_graph, node_key
 from .neo4j_client import Neo4jClient
 
 # Lineage pages are internal queries; give them a more generous row budget.
@@ -23,6 +23,7 @@ class Repository(Protocol):
     def resolve(self, ref: str) -> GNode | None: ...
     def search(self, q: str, limit: int = 25) -> list[GNode]: ...
     def lineage(self, start: GNode, direction: Direction, depth: int) -> SubGraph: ...
+    def governing_policies(self, ids: list[str]) -> SubGraph: ...
     def pii(self) -> SubGraph: ...
     def pipelines(self) -> SubGraph: ...
     def concepts(self, include_tables: bool) -> SubGraph: ...
@@ -33,7 +34,7 @@ class Repository(Protocol):
 
 def _node_from_record(value: dict[str, Any]) -> GNode:
     props = value.get("properties", {})
-    return GNode(id=str(props.get("id") or value["elementId"]), labels=value.get("labels", []), props=props)
+    return GNode(id=node_key(props, value["elementId"]), labels=value.get("labels", []), props=props)
 
 
 class LiveRepository:
@@ -58,6 +59,11 @@ class LiveRepository:
 
     def lineage(self, start: GNode, direction: Direction, depth: int) -> SubGraph:
         return self._sub(cypher.lineage(start.label, direction, depth), {"id": start.id})
+
+    def governing_policies(self, ids: list[str]) -> SubGraph:
+        if not ids:
+            return SubGraph()
+        return self._sub(cypher.GOVERNING_POLICIES, {"ids": ids})
 
     def pii(self) -> SubGraph:
         return self._sub(cypher.PII)

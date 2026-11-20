@@ -48,10 +48,10 @@ export function EmptyState({ title, children, icon }: { title: string; children?
 export function ErrorPanel({ code, message }: { code?: string; message: string }) {
   return (
     <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-xs">
-      <div className="flex items-center gap-1.5 font-semibold text-red-300">
+      <div className="flex items-center gap-1.5 font-semibold text-red-700">
         <AlertTriangle size={14} /> {code ?? "Error"}
       </div>
-      <div className="mt-1 whitespace-pre-wrap font-mono text-[11px] text-red-100">{message}</div>
+      <div className="mt-1 whitespace-pre-wrap font-mono text-[11px] text-red-900">{message}</div>
     </div>
   );
 }
@@ -72,22 +72,23 @@ export function TransformationBadge({ value }: { value: unknown }) {
   return <Badge color={transformationColor(value)}>{String(value)}</Badge>;
 }
 
-const STATUS_COLORS: Record<string, string> = { OK: "#10b981", VIOLATION: "#ef4444", "NOT MOVED": "#94a3b8" };
+const STATUS_COLORS: Record<string, string> = { OK: "#2E9E44", VIOLATION: "#DC2626", "NOT MOVED": "#64748B" };
 export function StatusBadge({ status }: { status: string }) {
-  return <Badge color={STATUS_COLORS[status] ?? "#94a3b8"}>{status}</Badge>;
+  return <Badge color={STATUS_COLORS[status] ?? "#64748B"}>{status}</Badge>;
 }
 
 export function Kpi({ label, value, tone = "default", hint }: { label: string; value: ReactNode; tone?: "default" | "good" | "bad" | "muted"; hint?: string }) {
   const toneCls = {
-    default: "text-ink-100",
-    good: "text-emerald-400",
-    bad: "text-red-400",
+    default: "text-[#001689]",
+    good: "text-emerald-600",
+    bad: "text-red-600",
     muted: "text-ink-300",
   }[tone];
   return (
-    <div className="rounded-lg border border-ink-700 bg-ink-900 px-4 py-3" title={hint}>
+    <div className="relative overflow-hidden rounded-xl border border-ink-700 bg-white px-4 py-3 shadow-soft" title={hint}>
+      <span className="absolute inset-x-0 top-0 h-[3px] bg-mastek-strip" aria-hidden />
       <div className="text-[11px] uppercase tracking-wide text-ink-400">{label}</div>
-      <div className={`mt-1 text-2xl font-semibold tabular-nums ${toneCls}`}>{value}</div>
+      <div className={`mt-1 font-display text-3xl font-bold tabular-nums ${toneCls}`}>{value}</div>
     </div>
   );
 }
@@ -98,8 +99,8 @@ export function PageHeader({ title, subtitle, cypher, children }: { title: strin
   return (
     <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
       <div>
-        <h1 className="text-lg font-semibold">{title}</h1>
-        {subtitle && <p className="mt-0.5 text-xs text-ink-400">{subtitle}</p>}
+        <h1 className="text-2xl font-bold">{title}</h1>
+        {subtitle && <p className="mt-0.5 text-sm text-ink-400">{subtitle}</p>}
       </div>
       <div className="flex items-center gap-2">
         {children}
@@ -132,7 +133,7 @@ export function Segmented<T extends string | number>({
         <button
           key={String(o.value)}
           onClick={() => onChange(o.value)}
-          className={`rounded px-2.5 py-1 text-xs transition ${o.value === value ? "bg-accent text-ink-950 font-semibold" : "text-ink-300 hover:text-ink-100"}`}
+          className={`rounded px-2.5 py-1 text-xs transition ${o.value === value ? "bg-accent text-white font-semibold" : "text-ink-300 hover:text-ink-100"}`}
         >
           {o.label}
         </button>

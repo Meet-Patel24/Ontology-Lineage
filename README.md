@@ -44,7 +44,7 @@ Copy `.env.example` to `.env` in the repo root and fill it in. Settings are read
 
 ## Run locally
 
-**Windows / VM, one click:** double-click `run-app.bat`. It checks for Python 3.11+ and Node 20+, creates `.env` from `.env.example` the first time and opens it in Notepad for your Neo4j details, installs backend and frontend packages (again only when `requirements.txt` or `package-lock.json` change), starts the API (:8000) and the UI (:5173) in their own windows, waits until both respond and then opens the browser. Both servers listen on all interfaces, so other machines can use `http://<vm-ip>:5173`. `stop-app.bat` stops them.
+**Windows / VM, one click:** double-click `run-app.bat`. It checks for Python 3.11+ and Node 20+, creates `.env` from `.env.example` the first time and opens it in Notepad for your Neo4j details, installs backend and frontend packages (again only when `requirements.txt` or `package-lock.json` change), starts the API (:8000) and the UI (:5173) in their own windows, waits until both respond and then opens the browser. Both servers listen on all interfaces, so other machines can use `http://<vm-ip>:5173`. `stop-app.bat` stops them. You can move or copy `run-app.bat` to any folder (e.g. the Desktop): on first run it asks you to pick the project folder once and remembers it in `run-app.path.txt` next to the .bat; you can also pass the folder as an argument, `run-app.bat "D:\Apps\Ontology-Lineage"`.
 
 **Windows, dev mode with auto-reload:** run `start-dev.bat`. It creates the virtual environment, installs dependencies the first time, and opens two windows: the API on :8000 and Vite on :5173. Then browse to <http://localhost:5173>.
 

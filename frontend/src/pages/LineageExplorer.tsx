@@ -19,8 +19,9 @@ export function LineageExplorer() {
   const [direction, setDirection] = useState<Direction>((params.direction as Direction) || "both");
   const [level, setLevel] = useState<Level>((params.level as Level) || "column");
   const [depth, setDepth] = useState<number>(Number(params.depth) || 3);
+  const [policies, setPolicies] = useState<boolean>(params.policies !== "false");
 
-  const res = useAsync(() => api.lineage(id, direction, depth, level), [id, direction, depth, level]);
+  const res = useAsync(() => api.lineage(id, direction, depth, level, policies), [id, direction, depth, level, policies]);
   const [graph, setGraph] = useState<GraphData>({ nodes: [], edges: [] });
   useEffect(() => {
     if (res.data) setGraph({ nodes: res.data.nodes, edges: res.data.edges });
@@ -37,6 +38,7 @@ export function LineageExplorer() {
 
   const start = res.data?.start;
   const flowEdges = graph.edges.filter((e) => e.type === "FLOWS_TO").length;
+  const policyNodes = graph.nodes.filter((n) => n.label === "PolicyDocument" && !n.start).length;
 
   return (
     <div className="flex h-full flex-col overflow-auto p-5">
@@ -82,14 +84,26 @@ export function LineageExplorer() {
             max={6}
             value={depth}
             onChange={(e) => setDepth(Number(e.target.value))}
-            className="w-36 accent-[#4f9cf9]"
+            className="w-36 accent-[#001689]"
           />
+        </Field>
+        <Field label="Governance">
+          <span className="flex h-[34px] items-center gap-2 text-xs text-ink-200">
+            <input
+              type="checkbox"
+              checked={policies}
+              onChange={(e) => setPolicies(e.target.checked)}
+              className="h-4 w-4 accent-[#001689]"
+              aria-label="Show governing policies"
+            />
+            Show governing policies
+          </span>
         </Field>
       </div>
 
       {start && (
         <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-ink-300">
-          <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-ink-950" style={{ background: labelColor(start.label) }}>
+          <span className="rounded px-1.5 py-0.5 text-[10px] font-semibold text-[#111827]" style={{ background: labelColor(start.label) }}>
             {start.label}
           </span>
           <span className="font-mono text-ink-100">
@@ -99,6 +113,11 @@ export function LineageExplorer() {
           <span className="text-ink-500">·</span>
           <span>
             {graph.nodes.length} nodes, {flowEdges} column flows
+            {policies && start.label !== "PolicyDocument" && (
+              <>
+                , {policyNodes} governing {policyNodes === 1 ? "policy" : "policies"}
+              </>
+            )}
           </span>
           <button
             className="ml-2 text-accent hover:underline"

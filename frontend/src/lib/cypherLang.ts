@@ -124,18 +124,18 @@ export const cypherLanguage = cypherStream;
 
 export const cypherHighlight = syntaxHighlighting(
   HighlightStyle.define([
-    { tag: t.keyword, color: "#c792ea", fontWeight: "600" },
-    { tag: t.typeName, color: "#ffcb6b" },
-    { tag: t.propertyName, color: "#82aaff" },
-    { tag: t.string, color: "#c3e88d" },
-    { tag: t.number, color: "#f78c6c" },
-    { tag: t.comment, color: "#6b7a90", fontStyle: "italic" },
-    { tag: t.special(t.variableName), color: "#f07178" },
-    { tag: t.function(t.variableName), color: "#89ddff" },
-    { tag: t.variableName, color: "#e8ecf2" },
-    { tag: t.operator, color: "#89ddff" },
-    { tag: t.meta, color: "#f472b6", fontWeight: "600" },
-    { tag: t.bracket, color: "#a6b0c0" },
+    { tag: t.keyword, color: "#001689", fontWeight: "600" },
+    { tag: t.typeName, color: "#9A6B00" },
+    { tag: t.propertyName, color: "#007C88" },
+    { tag: t.string, color: "#2E7D32" },
+    { tag: t.number, color: "#C2410C" },
+    { tag: t.comment, color: "#6B7280", fontStyle: "italic" },
+    { tag: t.special(t.variableName), color: "#B42318" },
+    { tag: t.function(t.variableName), color: "#0069C2" },
+    { tag: t.variableName, color: "#111827" },
+    { tag: t.operator, color: "#0069C2" },
+    { tag: t.meta, color: "#8B3FC8", fontWeight: "600" },
+    { tag: t.bracket, color: "#6B7280" },
   ]),
 );
 

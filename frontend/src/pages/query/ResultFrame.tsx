@@ -105,7 +105,7 @@ export function ResultFrame({ frame, onRerun }: { frame: Frame; onRerun: (f: Fra
         <div className="p-3 text-xs">
           <div className="font-semibold">{frame.info.title}</div>
           {frame.info.body !== undefined && (
-            <pre className="mt-2 overflow-auto rounded bg-ink-950 p-2 font-mono text-[11px] text-emerald-300">
+            <pre className="mt-2 overflow-auto rounded bg-ink-950 p-2 font-mono text-[11px] text-emerald-700">
               {JSON.stringify(frame.info.body, null, 2)}
             </pre>
           )}
@@ -114,13 +114,13 @@ export function ResultFrame({ frame, onRerun }: { frame: Frame; onRerun: (f: Fra
       {frame.status === "done" && result && (
         <div className="flex min-h-0 flex-1 flex-col">
           {result.truncated && (
-            <div className="flex items-center gap-2 border-b border-amber-500/30 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-200">
+            <div className="flex items-center gap-2 border-b border-amber-500/30 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-800">
               <AlertTriangle size={13} /> Results truncated at {result.records.length} rows (MAX_ROWS). Add a LIMIT or refine
               the query to see everything.
             </div>
           )}
           {s && s.notifications.length > 0 && (
-            <div className="border-b border-ink-700 bg-ink-850 px-3 py-1.5 text-[11px] text-amber-200">
+            <div className="border-b border-ink-700 bg-ink-850 px-3 py-1.5 text-[11px] text-amber-800">
               {s.notifications.map((n, i) => (
                 <div key={i} title={n.description}>
                   <AlertTriangle size={11} className="mr-1 inline" />

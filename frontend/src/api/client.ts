@@ -87,11 +87,11 @@ export const api = {
 
   search: (q: string, limit = 25) => request<{ rows: SearchRow[] }>("/api/search", { query: { q, limit } }),
 
-  lineage: (id: string, direction: Direction, depth: number, level: Level) =>
-    request<PageResponse>("/api/lineage", { query: { id, direction, depth, level } }),
+  lineage: (id: string, direction: Direction, depth: number, level: Level, policies = true) =>
+    request<PageResponse>("/api/lineage", { query: { id, direction, depth, level, policies } }),
 
-  impact: (id: string, depth: number, level: Level) =>
-    request<PageResponse<ImpactRow, ImpactSummary>>("/api/impact", { query: { id, depth, level } }),
+  impact: (id: string, depth: number, level: Level, policies = true) =>
+    request<PageResponse<ImpactRow, ImpactSummary>>("/api/impact", { query: { id, depth, level, policies } }),
 
   pii: () => request<PageResponse<PiiRow, PiiSummary>>("/api/pii"),
 

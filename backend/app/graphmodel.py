@@ -4,9 +4,10 @@ Both the live Neo4j repository and the in-memory snapshot repository produce a
 :class:`SubGraph`; the lineage computations in :mod:`app.lineage` and the
 conversion to the frontend "view" format only ever work with this model.
 
-Node identity is the business ``id`` property (e.g. ``pg:bankdb.banking.loans``),
-falling back to the Neo4j ``elementId`` for nodes without one (for example the
-virtual nodes returned by ``db.schema.visualization``).
+Node identity is the business ``id`` property (e.g. ``pg:bankdb.banking.loans``);
+policy documents and chunks use ``doc_id`` / ``chunk_id``; anything else falls back
+to the Neo4j ``elementId`` (for example the virtual nodes returned by
+``db.schema.visualization``).
 """
 
 from __future__ import annotations
@@ -29,7 +30,19 @@ LABEL_PRIORITY = [
     "Warehouse",
     "BusinessConcept",
     "Classification",
+    "PolicyDocument",
+    "PolicyChunk",
 ]
+
+# Business-key properties, in order of preference, that identify a node.
+KEY_PROPERTIES = ("id", "doc_id", "chunk_id")
+
+
+def node_key(props: dict[str, Any], element_id: str) -> str:
+    for k in KEY_PROPERTIES:
+        if props.get(k):
+            return str(props[k])
+    return str(element_id)
 
 
 def primary_label(labels: Iterable[str]) -> str:
@@ -52,7 +65,8 @@ class GNode:
 
     @property
     def name(self) -> str:
-        return str(self.props.get("name") or self.id)
+        p = self.props
+        return str(p.get("name") or p.get("title") or p.get("heading") or self.id)
 
     def has(self, label: str) -> bool:
         return label in self.labels
@@ -100,7 +114,7 @@ def from_neo4j_graph(graph: dict[str, list[dict[str, Any]]]) -> SubGraph:
     eid_to_key: dict[str, str] = {}
     for n in graph.get("nodes", []):
         props = n.get("properties", {})
-        key = str(props.get("id") or n["elementId"])
+        key = node_key(props, n["elementId"])
         eid_to_key[n["elementId"]] = key
         sub.add_node(GNode(id=key, labels=list(n.get("labels", [])), props=props))
     for r in graph.get("relationships", []):
@@ -128,6 +142,10 @@ def node_caption(node: GNode) -> tuple[str, str | None]:
         return str(p.get("name") or node.id), p.get("activity_type") or p.get("pipeline")
     if lbl in ("Pipeline", "Lakehouse", "Warehouse", "Database"):
         return str(p.get("name") or node.id), p.get("platform")
+    if lbl == "PolicyDocument":
+        return str(p.get("title") or p.get("doc_id") or node.id), "Policy document"
+    if lbl == "PolicyChunk":
+        return str(p.get("heading") or p.get("chunk_id") or node.id), "Policy section"
     return str(p.get("name") or node.id), None
 
 

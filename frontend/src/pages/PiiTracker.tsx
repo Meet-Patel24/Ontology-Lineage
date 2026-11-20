@@ -40,7 +40,7 @@ export function PiiTracker() {
           const r = c.row.original;
           return (
             <span>
-              <span className="mr-1 rounded bg-red-500/20 px-1 text-[10px] font-semibold text-red-300">{r.classification}</span>
+              <span className="mr-1 rounded bg-red-500/20 px-1 text-[10px] font-semibold text-red-700">{r.classification}</span>
               <span className="text-ink-300">{r.comment}</span>
             </span>
           );
@@ -58,7 +58,7 @@ export function PiiTracker() {
           return (
             <span className="font-mono text-[11px]">
               {r.target_table}.{r.target_column}
-              {r.target_classification && <span className="ml-1 text-[10px] text-amber-300">({r.target_classification})</span>}
+              {r.target_classification && <span className="ml-1 text-[10px] text-amber-700">({r.target_classification})</span>}
             </span>
           );
         },
@@ -68,7 +68,7 @@ export function PiiTracker() {
         accessorKey: "expression",
         header: "Masking expression",
         size: 280,
-        cell: (c) => <code className="whitespace-pre-wrap font-mono text-[11px] text-emerald-300">{(c.getValue() as string) ?? ""}</code>,
+        cell: (c) => <code className="whitespace-pre-wrap font-mono text-[11px] text-emerald-700">{(c.getValue() as string) ?? ""}</code>,
       },
       { accessorKey: "status", header: "Status", size: 110, cell: (c) => <StatusBadge status={c.getValue() as string} /> },
     ],

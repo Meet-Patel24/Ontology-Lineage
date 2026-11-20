@@ -166,7 +166,7 @@ export function QueryPage() {
       )}
       <div className="flex min-w-0 flex-1 flex-col">
         {snapshot && (
-          <div className="flex items-center gap-2 border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs text-amber-200">
+          <div className="flex items-center gap-2 border-b border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs text-amber-800">
             <WifiOff size={14} /> Live Cypher is unavailable in snapshot mode. The lineage pages still work on the offline
             snapshot; you can edit queries here and run them once connected.
           </div>
@@ -195,7 +195,7 @@ export function QueryPage() {
               {showParams && <ParamsPopover onClose={() => setShowParams(false)} />}
               <button
                 onClick={() => runFromEditor(editorRef.current?.getValue() ?? "")}
-                className="flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-ink-950 hover:brightness-110"
+                className="flex items-center gap-1.5 rounded-md bg-accent px-3 py-1.5 text-xs font-semibold text-white hover:brightness-110"
                 title="Run (Ctrl+Enter)"
               >
                 <Play size={13} fill="currentColor" /> Run
@@ -269,12 +269,12 @@ function ParamsPopover({ onClose }: { onClose: () => void }) {
         rows={8}
         className="w-full rounded border border-ink-600 bg-ink-950 p-2 font-mono text-[11px] text-ink-100 outline-none focus:border-accent"
       />
-      {error && <div className="mt-1 text-[11px] text-red-400">{error}</div>}
+      {error && <div className="mt-1 text-[11px] text-red-600">{error}</div>}
       <div className="mt-2 flex justify-end gap-2">
         <button onClick={onClose} className="rounded px-2 py-1 text-xs text-ink-300 hover:bg-ink-700">
           Cancel
         </button>
-        <button onClick={apply} className="rounded bg-accent px-3 py-1 text-xs font-semibold text-ink-950">
+        <button onClick={apply} className="rounded bg-accent px-3 py-1 text-xs font-semibold text-white">
           Apply
         </button>
       </div>
